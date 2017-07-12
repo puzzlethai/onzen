@@ -19,6 +19,7 @@
 
 <ons-template id="page1.html">
     <ons-page id="page1">
+        <ons-pull-hook disable > </ons-pull-hook>
         <ons-toolbar>
             <div class="center">Page 1</div>
         </ons-toolbar>
@@ -38,6 +39,7 @@
             <button class="export">Export</button>
         </div>
         <ons-button id="finish-image">Finish </ons-button>
+
     </ons-page>
 </ons-template>
 
@@ -72,9 +74,7 @@
 </ons-template>
 <script>
     $(document.body).css('overflow-y', 'hidden');
-    $('*').filter(function(index) {
-        return $(this).css('display') == 'block';
-    }).css('overflow-y', 'hidden');
+
     document.addEventListener('init', function(event) {
         $(function() {
 
