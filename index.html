@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ONZEN TEST</title>
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery/2.0.0/jquery.min.js"></script>
+    <script src="dist/jquery.cropit.js"></script>
+    <script src="dist/jquery-ui.js"></script>
+    <link rel="stylesheet" href="dist/css/app.css">
+    <link href="https://fonts.googleapis.com/css?family=Sriracha" rel="stylesheet" type='text/css'>
+</head>
+<body>
+<ons-navigator id="myNavigator" page="page1.html"></ons-navigator>
+
+<ons-template id="page1.html">
+    <ons-page id="page1">
+        <ons-toolbar>
+            <div class="center">Page 1</div>
+        </ons-toolbar>
+
+        <p>This is the first page.</p>
+        <div class="image-editor">
+            <input type="file" class="cropit-image-input">
+            <div class="cropit-preview"></div>
+
+            <div class="image-size-label">
+                Resize image
+            </div>
+            <input type="range" class="cropit-image-zoom-input">
+            <button class="rotate-ccw">Rotate counterclockwise</button>
+            <button class="rotate-cw">Rotate clockwise</button>
+
+            <button class="export">Export</button>
+        </div>
+        <ons-button id="finish-image">Finish </ons-button>
+    </ons-page>
+</ons-template>
+
+<ons-template id="page2.html">
+    <ons-page id="page2">
+        <ons-toolbar>
+            <div class="left"><ons-back-button>Back</ons-back-button></div>
+            <div class="center"></div>
+        </ons-toolbar>
+
+        <p>This is the second page.</p>
+        <div id="dropThis">
+            <canvas id="canvas1" width="370" height="320" ></canvas>
+        </div>
+
+        <div id="dragThis">
+            <canvas id="txtCanvas" width="100" height="100" ></canvas>
+        </div>
+        <button onclick ="showMeImage()">Show Example</button>
+        <ons-button id="finish-text">Finish </ons-button>
+    </ons-page>
+</ons-template>
+<ons-template id="page3.html">
+    <ons-page id="page3">
+        <div id="ozone"></div>
+        <ons-toolbar>
+            <div class="left"><ons-back-button>Back</ons-back-button></div>
+            <div class="center"></div>
+        </ons-toolbar>
+
+    </ons-page>
+</ons-template>
+<script>
+    document.addEventListener('init', function(event) {
+        $(function() {
+            var xPos, yPos,posX,posY;
+            var imageData,c,context_can,image;
+
+            /*        $('.image-editor').cropit({
+             imageState: {
+             src: 'http://lorempixel.com/500/400/',
+             },
+             });*/
+            $('.image-editor').cropit( );
+            $('.rotate-cw').click(function() {
+                $('.image-editor').cropit('rotateCW');
+            });
+            $('.rotate-ccw').click(function() {
+                $('.image-editor').cropit('rotateCCW');
+            });
+
+            $('.export').click(function() {
+
+
+
+
+                // window.open(imageData);
+                // console.log(imageData);
+                /*   convert imageData to file object for firebase.put()
+                 var byteString = atob(imageData.split(',')[1]);
+                 var ab = new ArrayBuffer(byteString.length);
+                 var ia = new Uint8Array(ab);
+                 for (var i = 0; i < byteString.length; i++) {
+                 ia[i] = byteString.charCodeAt(i);
+                 }
+                 var blob = new Blob([ia], {
+                 type: 'image/png'
+                 });
+                 var file = new File([blob], "image.png");
+                 */
+                /*  put file to firebase
+                 var storageRef = firebase.storage().ref("eak/image.png");
+                 var uploadTask = storageRef.put(file);
+                 uploadTask.on('state_changed', function progress(snapshot) {
+                 console.log(snapshot.bytesTransferred); // progress of upload
+                 }); */
+
+
+            });
+        });
+        var page = event.target;
+
+        if (page.id === 'page1') {
+            page.querySelector('#finish-image').onclick = function() {
+
+                document.querySelector('#myNavigator').pushPage('page2.html', {data: {title: 'Page 2'}});
+
+            };
+        } else if (page.id === 'page2') {
+            page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
+
+            /* Initialize Firebase
+             var config = {
+             apiKey: "AIzaSyA83WDgXFYbIXc6wI0D6tpShrIhMW8teRQ",
+             authDomain: "mysticker-f7d1e.firebaseapp.com",
+             databaseURL: "https://mysticker-f7d1e.firebaseio.com",
+             projectId: "mysticker-f7d1e",
+             storageBucket: "mysticker-f7d1e.appspot.com",
+             messagingSenderId: "342976982342"
+             };
+             firebase.initializeApp(config);
+             */
+            document.body._gestureDetector.dispose();
+            imageData = $('.image-editor').cropit('export', {
+                quality: 1
+            });
+
+            c = document.getElementById("canvas1");
+            context_can = c.getContext("2d");
+            image = new Image();
+            image.onload = function() {
+                context_can.drawImage(image, 0, 0);
+                /*                context_can.font = "35pt Sriracha";
+                 context_can.fillStyle = "red"
+                 context_can.strokeStyle = 'black';
+                 context_can.lineWidth = 3
+                 context_can.fillText("รักแม่", 40, 40);
+                 context_can.strokeText("รักแม่", 40, 40);
+                 context_can .fill();
+                 context_can.stroke();*/
+            };
+            image.src = imageData;
+            var d = document.getElementById("txtCanvas");
+            var cont_cantext = d.getContext("2d");
+            cont_cantext.textAlign = "left";
+            cont_cantext.textBaseline ="top";
+            cont_cantext.font = "35pt Sriracha";
+            cont_cantext.fillStyle = "red"
+            cont_cantext.strokeStyle = 'black';
+            cont_cantext.lineWidth = 3
+            cont_cantext.fillText("รักแม่", 0, 0);
+            cont_cantext.strokeText("รักแม่", 0, 0);
+            cont_cantext .fill();
+            cont_cantext.stroke();
+            $('#dragThis').draggable(
+                {
+
+                    drag: function(){
+                        //console.log("in on drag");
+                        var offset = $(this).offset();
+                        xPos = offset.left;
+                        yPos = offset.top;
+                        // console.log("xPos -->"+xPos+"  yPos -->"+yPos);
+//                $('#posX').text('x: ' + xPos);
+//                $('#posY').text('y: ' + yPos);
+                    }
+                });
+            $('#dropThis').droppable(
+                { drop: function(){
+                    console.log("in on drop");
+                    var margin_top = $(".toolbar").css("height");
+                    // alert("margin_top = "+margin_top);
+
+                    console.log("xPos -->"+xPos+"  yPos -->"+yPos);
+                    var eTop = $('#canvas1').offset().top//-$(window).scrollTop();
+                    var eLeft = $('#canvas1').offset().left//-$(window).scrollLeft();
+                    console.log("eTop -->"+eTop+"eLeft -->"+eLeft);
+                    posX =xPos-eLeft;
+                    posY =yPos-eTop-parseInt(margin_top);
+                    console.log("xPos -->"+posX+"  yPos -->"+posY);
+                    /*        context_can.font = "35pt Sriracha";
+                     context_can.fillStyle = "red"
+                     context_can.strokeStyle = 'black';
+                     context_can.lineWidth = 3
+                     context_can.fillText("รักแม่", xPos, yPos);
+                     context_can.strokeText("รักแม่", xPos, yPos);
+                     context_can .fill();
+                     context_can.stroke();*/
+
+
+
+                    /*    var imageData2 = $('.image-editor').cropit('export', {
+                     quality: 1
+                     });
+                     var c2 = document.getElementById("canvas1");
+                     var context_can2 = c2.getContext("2d");
+                     var image2 = new Image();
+
+                     image2.onload = function() {
+                     context_can2.clearRect(0, 0, c2.width, c2.height);
+                     context_can2.drawImage(image2, 0, 0);
+                     context_can2.font = "35pt Sriracha";
+                     context_can2.fillStyle = "red"
+                     context_can2.strokeStyle = 'black';
+                     context_can2.lineWidth = 3
+                     context_can2.fillText("รักแม่",xPos, yPos);
+                     context_can2.strokeText("รักแม่",xPos, yPos);
+                     context_can2 .fill();
+                     context_can2.stroke();
+                     };
+                     image2.src = imageData2;*/
+//    event.preventDefault();
+
+                }});
+            page.querySelector('#finish-text').onclick = function() {
+
+                document.querySelector('#myNavigator').pushPage('page3.html', {data: {title: 'Page 3'}});
+
+            };
+
+        } else if (page.id === 'page3') {
+            page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
+
+            context_can.textAlign ="left";
+            context_can.textBaseline ="top";
+            context_can.font = "35pt Sriracha";
+            context_can.fillStyle = "red"
+            context_can.strokeStyle = 'black';
+            context_can.lineWidth = 3
+            context_can.fillText("รักแม่", posX, posY+35);
+            context_can.strokeText("รักแม่", posX, posY+35);
+            context_can.fill();
+            context_can.stroke();
+            var w=window.open('about:blank','image from canvas');
+            w.document.write("<img src='"+ c.toDataURL("image/png")+"' alt='from canvas'/>")
+        }
+    });
+
+</script>
+</body>
+</html>
