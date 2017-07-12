@@ -73,9 +73,7 @@
 <script>
     document.addEventListener('init', function(event) {
         $(function() {
-            $("html").css({
-                "touch-action": "pan-down"
-            });
+
             var xPos, yPos,posX,posY;
             var imageData,c,context_can,image;
 
@@ -120,6 +118,9 @@
 
 
             });
+        });
+        $("html").css({
+            "touch-action": "pan-down"
         });
         var page = event.target;
 
