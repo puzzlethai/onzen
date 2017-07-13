@@ -69,7 +69,7 @@
 
         <p>This is the second page.</p>
         <div id="dropThis">
-            <canvas id="canvas1" width="555" height="480" ></canvas>
+            <canvas id="canvas1" width="370" height="320" ></canvas>
         </div>
 
         <div id="dragThis">
@@ -106,9 +106,10 @@
 
            $('.image-editor').cropit({
                smallImage: 'allow',
+               freeMove :true,
                 imageBackground: true,
                 imageBackgroundBorderWidth: 15 });
-            $('.image-editor').cropit('previewSize', { width: 555, height: 480 });
+            $('.image-editor').cropit('previewSize', { width: 370, height: 320 });
             $('.image-editor').cropit();
             $('.select-image-btn').click(function() {
                 $('.cropit-image-input').click();
