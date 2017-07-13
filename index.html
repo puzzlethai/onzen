@@ -19,24 +19,41 @@
 
 <ons-template id="page1.html">
     <ons-page id="page1">
-        <ons-pull-hook disable > </ons-pull-hook>
+        <ons-pull-hook disable > </ons-pull-hook>  <!--prevent pull-down refresh-->
         <ons-toolbar>
             <div class="center">Page 1</div>
         </ons-toolbar>
 
-        <p>This is the first page.</p>
         <div class="image-editor">
-            <input type="file" class="cropit-image-input">
+            <!-- The actual file input will be hidden -->
+            <input type="file" class="cropit-image-input" />
+            <!-- And clicking on this button will open up select file dialog -->
+            <div class="select-image-btn">
+                <span class="notification notification--material">1</span>
+                <ons-button>
+                    <ons-icon icon="md-face"></ons-icon>
+                    Load Image
+                </ons-button>
+            </div>
             <div class="cropit-preview"></div>
 
-            <div class="image-size-label">
+<!--            <div class="image-size-label">
                 Resize image
-            </div>
-            <input type="range" class="cropit-image-zoom-input">
-            <button class="rotate-ccw">Rotate counterclockwise</button>
-            <button class="rotate-cw">Rotate clockwise</button>
+            </div>-->
 
-            <button class="export">Export</button>
+
+
+        <table >
+            <tr>
+                <td><ons-icon size="15px" icon="md-flower-alt" ></ons-icon></td>
+                <td><input type="range" class="cropit-image-zoom-input custom"></td>
+                <td><ons-icon size="30px" icon="md-flower-alt" ></ons-icon></td>
+                <td>&nbsp;</td>
+                <td><ons-button class="rotate-ccw"><ons-icon icon="md-rotate-left"></ons-icon></ons-button></td>
+                <td><ons-button class="rotate-cw"><ons-icon icon="md-rotate-right"></ons-icon></ons-button></td>
+            </tr>
+        </table>
+
         </div>
         <ons-button id="finish-image">Finish </ons-button>
 
@@ -52,7 +69,7 @@
 
         <p>This is the second page.</p>
         <div id="dropThis">
-            <canvas id="canvas1" width="370" height="320" ></canvas>
+            <canvas id="canvas1" width="555" height="480" ></canvas>
         </div>
 
         <div id="dragThis">
@@ -86,7 +103,16 @@
              src: 'http://lorempixel.com/500/400/',
              },
              });*/
-            $('.image-editor').cropit( );
+
+           $('.image-editor').cropit({
+               smallImage: 'allow',
+                imageBackground: true,
+                imageBackgroundBorderWidth: 15 });
+            $('.image-editor').cropit('previewSize', { width: 555, height: 480 });
+            $('.image-editor').cropit();
+            $('.select-image-btn').click(function() {
+                $('.cropit-image-input').click();
+            });
             $('.rotate-cw').click(function() {
                 $('.image-editor').cropit('rotateCW');
             });
