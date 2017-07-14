@@ -11,7 +11,9 @@
 .cropit-preview-image-container {
     cursor: move;
 }
-
+.cropit-preview-background {
+    opacity: .2;
+}
 .image-size-label {
     margin-top: 10px;
 }

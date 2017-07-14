@@ -107,9 +107,8 @@
            $('.image-editor').cropit({
                smallImage: 'allow',
                freeMove :true,
-                imageBackground: true,
-                imageBackgroundBorderWidth: 15 });
-            $('.image-editor').cropit('previewSize', { width: 370, height: 320 });
+                imageBackground: true }); // ,            imageBackgroundBorderWidth: 15
+            // $('.image-editor').cropit('previewSize', { width: 370, height: 320 });
             $('.image-editor').cropit();
             $('.select-image-btn').click(function() {
                 $('.cropit-image-input').click();
