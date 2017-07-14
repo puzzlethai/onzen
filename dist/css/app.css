@@ -14,6 +14,9 @@
 .cropit-preview-background {
     opacity: .2;
 }
+input.cropit-image-zoom-input {
+    position: relative;
+}
 .image-size-label {
     margin-top: 10px;
 }
