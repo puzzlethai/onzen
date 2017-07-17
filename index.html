@@ -15,7 +15,7 @@
 
 </head>
 <body>
-<div class="image-editor">
+
 <ons-navigator id="myNavigator" page="page1.html"></ons-navigator>
 
 <ons-template id="page1.html">
@@ -26,10 +26,10 @@
 <!--            <ons-toolbar-button id="load-image" >
                  <i class="zmdi zmdi zmdi-face "> Load Image</i>
             </ons-toolbar-button>-->
-                <div style="display: block; width: 100px; height: 20px; overflow: hidden;">
+<!--                <div style="display: block; width: 100px; height: 20px; overflow: hidden;">
                     <button style="width: 110px; height: 30px; position: relative; top: -5px; left: -5px;"><a href="javascript: void(0)">Upload File</a></button>
                     <input type="file" id="upload_input" class="cropit-image-input"  name="upload" style="font-size: 50px; width: 120px; opacity: 0; filter:alpha(opacity=0);  position: relative; top: -40px;; left: -20px" />
-                </div>
+                </div>-->
                 </div>
             <div class="center" style="text-align: center">1</div>
             <div class="right">
@@ -41,7 +41,7 @@
 
         </ons-toolbar>
 
-
+        <div class="image-editor">
             <!-- The actual file input will be hidden -->
 
             <!-- And clicking on this button will open up select file dialog -->
@@ -63,8 +63,12 @@
                         Load Image
                     </ons-button>-->
                 <!--</td>-->
-                <!--<td><input type="file" class="cropit-image-input" style="opacity:0;width:0px;height:0px;"/></td>-->
-
+                <td>
+                    <input type="file" class="cropit-image-input" />
+                <ons-button id="load-image">
+                    <ons-icon icon="md-face"></ons-icon>
+                    Load Image
+                </ons-button></td>
             </tr>
         </table>
             <table >
@@ -77,7 +81,7 @@
                 <td><ons-button class="rotate-cw" ><ons-icon icon="md-rotate-right"></ons-icon></ons-button></td>
             </tr>
         </table>
-
+        </div>
         <ons-pull-hook disable > </ons-pull-hook>  <!--prevent pull-down refresh-->
     </ons-page>
 </ons-template>
@@ -111,7 +115,7 @@
 
     </ons-page>
 </ons-template>
-</div>
+
 <script>
     $(document.body).css('overflow-y', 'hidden');
 
@@ -163,9 +167,12 @@
                 $('.cropit-image-input').click();
 
             });*/
-/*            page.querySelector('#load-image').onclick = function() {
+            page.querySelector('#load-image').onclick = function() {
+                $('.cropit-image-input').show();
+                $('.cropit-image-input').focus();
                 $('.cropit-image-input').click();
-            };*/
+                $('.cropit-image-input').hide();
+            };
             $('.rotate-cw').click(function() {
                 $('.image-editor').cropit('rotateCW');
             });

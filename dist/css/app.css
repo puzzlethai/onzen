@@ -28,10 +28,12 @@ input, .export {
 button {
     margin-top: 10px;
 }
-/*input.cropit-image-input {
+input.cropit-image-input {
     visibility: hidden;
+}
+/*input[type="file"] {
+    opacity: 0;
 }*/
-
 input[type='range']  {
     -webkit-appearance: none ;
     width:200px;
