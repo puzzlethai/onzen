@@ -30,7 +30,6 @@ button {
 }
 input.cropit-image-input {
     visibility: hidden;
-    position: absolute;
 }
 
 input[type='range']  {
