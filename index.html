@@ -58,7 +58,7 @@
                         Load Image
                     </ons-button>
                 </td>
-                <td><input type="file" class="cropit-image-input" /></td>
+                <td><input type="file" class="cropit-image-input" style="opacity:0;width:0px;height:0px;"/></td>
             </tr>
         </table>
             <table >
@@ -120,11 +120,13 @@
              },
              });*/
 
-            if(window.FileReader) {   //do this
+/*
+            if(window.FileReader) {
                 ons.notification.alert("support");
             } else {
                 ons.notification.alert("doesn't support");
             }
+*/
 
         });
 
