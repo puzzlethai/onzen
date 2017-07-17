@@ -106,7 +106,11 @@
              },
              });*/
 
-
+            if(window.FileReader) {   //do this
+                ons.notification.alert("support");
+            } else {
+                ons.notification.alert("doesn't support");
+            }
 
 
         });
