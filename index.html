@@ -26,10 +26,7 @@
 <!--            <ons-toolbar-button id="load-image" >
                  <i class="zmdi zmdi zmdi-face "> Load Image</i>
             </ons-toolbar-button>-->
-<!--                <div style="display: block; width: 100px; height: 20px; overflow: hidden;">
-                    <button style="width: 110px; height: 30px; position: relative; top: -5px; left: -5px;"><a href="javascript: void(0)">Upload File</a></button>
-                    <input type="file" id="upload_input" class="cropit-image-input"  name="upload" style="font-size: 50px; width: 120px; opacity: 0; filter:alpha(opacity=0);  position: relative; top: -40px;; left: -20px" />
-                </div>-->
+
                 </div>
             <div class="center" style="text-align: center">1</div>
             <div class="right">
@@ -40,8 +37,9 @@
                     </div>
 
         </ons-toolbar>
-
         <div class="image-editor">
+
+
             <!-- The actual file input will be hidden -->
 
             <!-- And clicking on this button will open up select file dialog -->
@@ -56,6 +54,11 @@
 
         <table >
             <tr>
+                <div style="display: block;  overflow: hidden;">
+                    <!--          <button style="width: 110px; height: 30px; position: relative; top: -5px; left: -5px;"><a href="javascript: void(0)">Upload File</a></button>-->
+                    <ons-button >Up load </ons-button>
+                    <input type="file" id="upload_input" class="cropit-image-input"  name="upload" style="font-size: 50px; width: 120px; opacity: 0; filter:alpha(opacity=0);  position: relative; top: -40px;; left: -20px" />
+                </div>
                <!-- <td>-->
                     <!--<div class="select-image-btn">Select new image</div>-->
 <!--                    <ons-button id="load-image">
@@ -63,12 +66,12 @@
                         Load Image
                     </ons-button>-->
                 <!--</td>-->
-                <td>
+<!--                <td>
                     <input type="file" class="cropit-image-input" />
                 <ons-button id="load-image">
                     <ons-icon icon="md-face"></ons-icon>
                     Load Image
-                </ons-button></td>
+                </ons-button></td>-->
             </tr>
         </table>
             <table >
@@ -83,6 +86,7 @@
         </table>
         </div>
         <ons-pull-hook disable > </ons-pull-hook>  <!--prevent pull-down refresh-->
+
     </ons-page>
 </ons-template>
 
@@ -167,13 +171,9 @@
                 $('.cropit-image-input').click();
 
             });*/
-            page.querySelector('#load-image').onclick = function() {
-                $('.cropit-image-input').show();
-                $('.cropit-image-input').focus();
+/*            page.querySelector('#load-image').onclick = function() {
                 $('.cropit-image-input').click();
-                $('.cropit-image-input').hide();
-                ons.notification.alert("working");
-            };
+            };*/
             $('.rotate-cw').click(function() {
                 $('.image-editor').cropit('rotateCW');
             });
