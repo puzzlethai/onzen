@@ -19,18 +19,18 @@
 
 <ons-template id="page1.html">
     <ons-page id="page1">
-        <ons-pull-hook disable > </ons-pull-hook>  <!--prevent pull-down refresh-->
-        <ons-toolbar  fixed-style>
+
+        <ons-toolbar >
             <div class="left">
-            <ons-button id="load-image"  >
+            <ons-toolbar-button id="load-image"  >
                  <i class="zmdi zmdi zmdi-face "> Load Image</i>
-            </ons-button>
+            </ons-toolbar-button>
                 </div>
             <div class="center" style="text-align: center">1</div>
             <div class="right">
-                <ons-button id="next-page2"  disabled >
+                <ons-toolbar-button id="next-page2"  disabled >
                     Next &nbsp<i class="zmdi zmdi zmdi-play zmdi-hc-lg"></i>
-                </ons-button>
+                </ons-toolbar-button>
             </div>
         </ons-toolbar>
 
@@ -58,7 +58,7 @@
             </tr>
         </table>
         </div>
-
+        <ons-pull-hook disable > </ons-pull-hook>  <!--prevent pull-down refresh-->
     </ons-page>
 </ons-template>
 
@@ -66,7 +66,7 @@
     <ons-page id="page2">
         <ons-toolbar>
             <div class="left"><ons-back-button>Back</ons-back-button></div>
-            <div class="center"></div>
+            <div class="center" style="text-align: center"></div>
         </ons-toolbar>
 
         <p>This is the second page.</p>
