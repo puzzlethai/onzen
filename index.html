@@ -52,14 +52,18 @@
 
         <table >
             <tr>
-                <td>
-                    <div class="select-image-btn">Select new image</div>
+               <!-- <td>-->
+                    <!--<div class="select-image-btn">Select new image</div>-->
 <!--                    <ons-button id="load-image">
                         <ons-icon icon="md-face"></ons-icon>
                         Load Image
                     </ons-button>-->
-                </td>
-                <td><input type="file" class="cropit-image-input" style="opacity:0;width:0px;height:0px;"/></td>
+                <!--</td>-->
+                <!--<td><input type="file" class="cropit-image-input" style="opacity:0;width:0px;height:0px;"/></td>-->
+                <div style="display: block; width: 100px; height: 20px; overflow: hidden;">
+                    <button style="width: 110px; height: 30px; position: relative; top: -5px; left: -5px;"><a href="javascript: void(0)">Upload File</a></button>
+                    <input type="file" id="upload_input" class="cropit-image-input"  name="upload" style="font-size: 50px; width: 120px; opacity: 0; filter:alpha(opacity=0);  position: relative; top: -40px;; left: -20px" />
+                </div>
             </tr>
         </table>
             <table >
@@ -149,11 +153,14 @@
             }); // ,            imageBackgroundBorderWidth: 15
             // $('.image-editor').cropit('previewSize', { width: 370, height: 320 });
             $('.image-editor').cropit();
-            $('.select-image-btn').click(function() {
+            $('#btn').click(function () {
+                $('#fileupload').click();
+            });
+/*            $('.select-image-btn').click(function() {
 
                 $('.cropit-image-input').click();
 
-            });
+            });*/
 /*            page.querySelector('#load-image').onclick = function() {
                 $('.cropit-image-input').click();
             };*/

@@ -28,9 +28,9 @@ input, .export {
 button {
     margin-top: 10px;
 }
-input.cropit-image-input {
+/*input.cropit-image-input {
     visibility: hidden;
-}
+}*/
 
 input[type='range']  {
     -webkit-appearance: none ;
