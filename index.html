@@ -53,10 +53,11 @@
         <table >
             <tr>
                 <td>
-                    <ons-button id="load-image">
+                    <div class="select-image-btn">Select new image</div>
+<!--                    <ons-button id="load-image">
                         <ons-icon icon="md-face"></ons-icon>
                         Load Image
-                    </ons-button>
+                    </ons-button>-->
                 </td>
                 <td><input type="file" class="cropit-image-input" style="opacity:0;width:0px;height:0px;"/></td>
             </tr>
@@ -148,14 +149,14 @@
             }); // ,            imageBackgroundBorderWidth: 15
             // $('.image-editor').cropit('previewSize', { width: 370, height: 320 });
             $('.image-editor').cropit();
-/*            $('.select-image-btn').click(function() {
+            $('.select-image-btn').click(function() {
 
                 $('.cropit-image-input').click();
 
-            });*/
-            page.querySelector('#load-image').onclick = function() {
+            });
+/*            page.querySelector('#load-image').onclick = function() {
                 $('.cropit-image-input').click();
-            };
+            };*/
             $('.rotate-cw').click(function() {
                 $('.image-editor').cropit('rotateCW');
             });
