@@ -41,17 +41,19 @@
         </ons-toolbar>
 
         <div class="image-editor">
-    <ons-row vertical-align="center">
+    <ons-row >
+
             <label class="fileContainer">
                 Upload File
                 <input type="file" class="cropit-image-input"/>
             </label>
+
     </ons-row>
 <ons-row>
-    <ons-col width="10px">   </ons-col>
-    <ons-col>
+    <!--<ons-col width="10px">   </ons-col>-->
+
                     <div class="cropit-preview"></div>
-    </ons-col>
+
 </ons-row>
 
 
@@ -122,11 +124,7 @@
             var xPos, yPos,posX,posY;
             var imageData,c,context_can,image;
 
-            /*        $('.image-editor').cropit({
-             imageState: {
-             src: 'http://lorempixel.com/500/400/',
-             },
-             });*/
+
 
 /*
             if(window.FileReader) {
