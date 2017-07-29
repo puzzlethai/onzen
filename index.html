@@ -24,11 +24,11 @@
         <ons-toolbar >
             <div class="left">
 
-<!--            <ons-toolbar-button id="load-image" >
-                 <i class="zmdi zmdi zmdi-face "> Load Image</i>
-            </ons-toolbar-button>-->
+                <!--            <ons-toolbar-button id="load-image" >
+                                 <i class="zmdi zmdi zmdi-face "> Load Image</i>
+                            </ons-toolbar-button>-->
 
-                    </div>
+            </div>
 
             <div class="center" style="text-align: center">1</div>
             <div class="right">
@@ -36,25 +36,25 @@
                 <ons-toolbar-button id="next-page2"  disabled >
                     Next &nbsp<i class="zmdi zmdi zmdi-play zmdi-hc-lg"></i>
                 </ons-toolbar-button>
-                    </div>
+            </div>
 
         </ons-toolbar>
 
         <div class="image-editor">
-    <ons-row >
+            <ons-row >
 
-            <label class="fileContainer">
-                Upload File
-                <input type="file" class="cropit-image-input"/>
-            </label>
+                <label class="fileContainer">
+                    Upload File
+                    <input type="file" class="cropit-image-input"/>
+                </label>
 
-    </ons-row>
-<ons-row>
-    <!--<ons-col width="10px">   </ons-col>-->
+            </ons-row>
+            <ons-row>
+                <!--<ons-col width="10px">   </ons-col>-->
 
-                    <div class="cropit-preview"></div>
+                <div class="cropit-preview"></div>
 
-</ons-row>
+            </ons-row>
 
 
             <!-- The actual file input will be hidden -->
@@ -62,24 +62,24 @@
             <!-- And clicking on this button will open up select file dialog -->
             <!--<div class="select-image-btn">-->
 
-                <!--<ons-button id="load-image">
-                    <ons-icon icon="md-face"></ons-icon>
-                    Load Image
-                </ons-button>-->
+            <!--<ons-button id="load-image">
+                <ons-icon icon="md-face"></ons-icon>
+                Load Image
+            </ons-button>-->
             <!--</div>-->
 
 
 
             <table >
-            <tr>
-                <td><ons-icon size="15px" icon="md-flower-alt" ></ons-icon></td>
-                <td><input type="range" class="cropit-image-zoom-input custom"></td>
-                <td><ons-icon size="30px" icon="md-flower-alt" ></ons-icon></td>
-                <td>&nbsp;</td>
-                <td><ons-button class="rotate-ccw" ><ons-icon icon="md-rotate-left"></ons-icon></ons-button></td>
-                <td><ons-button class="rotate-cw" ><ons-icon icon="md-rotate-right"></ons-icon></ons-button></td>
-            </tr>
-        </table>
+                <tr>
+                    <td><ons-icon size="15px" icon="md-flower-alt" ></ons-icon></td>
+                    <td><input type="range" class="cropit-image-zoom-input custom"></td>
+                    <td><ons-icon size="30px" icon="md-flower-alt" ></ons-icon></td>
+                    <td>&nbsp;</td>
+                    <td><ons-button class="rotate-ccw" ><ons-icon icon="md-rotate-left"></ons-icon></ons-button></td>
+                    <td><ons-button class="rotate-cw" ><ons-icon icon="md-rotate-right"></ons-icon></ons-button></td>
+                </tr>
+            </table>
         </div>
 
     </ons-page>
@@ -93,13 +93,14 @@
         </ons-toolbar>
 
         <p>This is the second page.</p>
-        <div id="dropThis">
+        <!--<div id="dropThis">-->
             <canvas id="canvas1" width="370" height="320" ></canvas>
-        </div>
-
-        <div id="dragThis">
-            <canvas id="txtCanvas" width="100" height="100" ></canvas>
-        </div>
+        <!--</div>-->
+        <ons-gesture-detector>
+        <!--<div id="dragThis">-->
+            <canvas id="txtCanvas" class="draggable" width="100" height="100" ></canvas>
+        <!--</div>-->
+        </ons-gesture-detector>
         <button onclick ="showMeImage()">Show Example</button>
         <ons-button id="finish-text">Finish </ons-button>
     </ons-page>
@@ -116,26 +117,116 @@
 </ons-template>
 
 <script>
-    $(document.body).css('overflow-y', 'hidden');
+    //$(document.body).css('overflow-y', 'hidden');
+    var xPos, yPos,posX,posY;
+    var imageData,c,context_can,image;
 
+/*        $('#dragThis').draggable(
+            {
+
+                drag: function () {
+                    //console.log("in on drag");
+                    var offset = $(this).offset();
+                    xPos = offset.left;
+                    yPos = offset.top;
+                    // console.log("xPos -->"+xPos+"  yPos -->"+yPos);
+//                $('#posX').text('x: ' + xPos);
+//                $('#posY').text('y: ' + yPos);
+                }
+            });*/
+/*        $('#dropThis').droppable(
+            {
+                drop: function () {
+                    console.log("in on drop");
+                    var margin_top = $(".toolbar").css("height");
+                    // alert("margin_top = "+margin_top);
+
+                    console.log("xPos -->" + xPos + "  yPos -->" + yPos);
+                    var eTop = $('#canvas1').offset().top;//-$(window).scrollTop();
+                    var eLeft = $('#canvas1').offset().left;//-$(window).scrollLeft();
+                    console.log("eTop -->" + eTop + "eLeft -->" + eLeft);
+                    posX = xPos - eLeft;
+                    posY = yPos - eTop - parseInt(margin_top);
+                    console.log("xPos -->" + posX + "  yPos -->" + posY);
+                    /!*        context_can.font = "35pt Sriracha";
+             context_can.fillStyle = "red"
+             context_can.strokeStyle = 'black';
+             context_can.lineWidth = 3
+             context_can.fillText("รักแม่", xPos, yPos);
+             context_can.strokeText("รักแม่", xPos, yPos);
+             context_can .fill();
+             context_can.stroke();*!/
+
+
+                    /!*    var imageData2 = $('.image-editor').cropit('export', {
+             quality: 1
+             });
+             var c2 = document.getElementById("canvas1");
+             var context_can2 = c2.getContext("2d");
+             var image2 = new Image();
+
+             image2.onload = function() {
+             context_can2.clearRect(0, 0, c2.width, c2.height);
+             context_can2.drawImage(image2, 0, 0);
+             context_can2.font = "35pt Sriracha";
+             context_can2.fillStyle = "red"
+             context_can2.strokeStyle = 'black';
+             context_can2.lineWidth = 3
+             context_can2.fillText("รักแม่",xPos, yPos);
+             context_can2.strokeText("รักแม่",xPos, yPos);
+             context_can2 .fill();
+             context_can2.stroke();
+             };
+             image2.src = imageData2;*!/
+//    event.preventDefault();
+
+                }
+            });*/
+
+    document.addEventListener("show",function(e){
+        if(e.target.id == 'page2'){
+            fn.enableGD();
+        }
+    });
+    window.fn = {}
+    fn.vtop = 0;
+    fn.vleft = 0;
+    window.fn.enableGD = function(){
+        var dragItems = document.querySelectorAll('.draggable');
+        for (var i = 0; i < dragItems.length; i++) {
+            dragItems[i].addEventListener('dragstart', function(e) {
+                fn.vtop = parseInt(e.target.style.top || 0,10);
+                fn.vleft = parseInt(e.target.style.left || 0,10);
+                // document.getElementById('status').value = "Drag Start";
+            });
+            dragItems[i].addEventListener('drag', function(e) {
+                e.target.style.top = parseInt(fn.vtop + e.gesture.deltaY) + 'px';
+
+                e.target.style.left = parseInt(fn.vleft + e.gesture.deltaX) + 'px';
+
+                //document.getElementById('status').value = "Dragging";
+                //document.getElementById('xdel').value = e.gesture.deltaX;
+                //document.getElementById('ydel').value = e.gesture.deltaY;
+                //document.getElementById('xpos').value = e.target.style.left;
+                //document.getElementById('ypos').value = e.target.style.top;
+            });
+            dragItems[i].addEventListener('dragend', function(e) {
+                // THIS EVENT IS NOT REQUIRED UNLESS YOU ARE DETECTING DROP
+                fn.vtop = parseInt(e.target.style.top || 0,10);
+                fn.vleft = parseInt(e.target.style.left || 0,10);
+
+                var margin_top = $(".toolbar").css("height");
+                console.log("x : "+fn.vleft);
+                console.log("y : "+fn.vtop);
+console.log("margin :"+margin_top);
+
+                posX =  parseInt(fn.vleft);
+                posY =  parseInt(fn.vtop)-parseInt(margin_top);
+                //document.getElementById('status').value = "Drag End";
+            });
+        }
+    }
     document.addEventListener('init', function(event) {
-        $(function() {
-
-            var xPos, yPos,posX,posY;
-            var imageData,c,context_can,image;
-
-
-
-/*
-            if(window.FileReader) {
-                ons.notification.alert("support");
-            } else {
-                ons.notification.alert("doesn't support");
-            }
-*/
-
-        });
-
         var page = event.target;
 
         if (page.id === 'page1') {
@@ -157,14 +248,14 @@
             $('#btn').click(function () {
                 $('#fileupload').click();
             });
-/*            $('.select-image-btn').click(function() {
+            /*            $('.select-image-btn').click(function() {
 
-                $('.cropit-image-input').click();
+                            $('.cropit-image-input').click();
 
-            });*/
-/*            page.querySelector('#load-image').onclick = function() {
-                $('.cropit-image-input').click();
-            };*/
+                        });*/
+            /*            page.querySelector('#load-image').onclick = function() {
+                            $('.cropit-image-input').click();
+                        };*/
             $('.rotate-cw').click(function() {
                 $('.image-editor').cropit('rotateCW');
             });
@@ -222,66 +313,8 @@
             cont_cantext.strokeText("รักแม่", 0, 0);
             cont_cantext .fill();
             cont_cantext.stroke();
-            $('#dragThis').draggable(
-                {
-
-                    drag: function(){
-                        //console.log("in on drag");
-                        var offset = $(this).offset();
-                        xPos = offset.left;
-                        yPos = offset.top;
-                        // console.log("xPos -->"+xPos+"  yPos -->"+yPos);
-//                $('#posX').text('x: ' + xPos);
-//                $('#posY').text('y: ' + yPos);
-                    }
-                });
-            $('#dropThis').droppable(
-                { drop: function(){
-                    console.log("in on drop");
-                    var margin_top = $(".toolbar").css("height");
-                    // alert("margin_top = "+margin_top);
-
-                    console.log("xPos -->"+xPos+"  yPos -->"+yPos);
-                    var eTop = $('#canvas1').offset().top;//-$(window).scrollTop();
-                    var eLeft = $('#canvas1').offset().left;//-$(window).scrollLeft();
-                    console.log("eTop -->"+eTop+"eLeft -->"+eLeft);
-                    posX =xPos-eLeft;
-                    posY =yPos-eTop-parseInt(margin_top);
-                    console.log("xPos -->"+posX+"  yPos -->"+posY);
-                    /*        context_can.font = "35pt Sriracha";
-                     context_can.fillStyle = "red"
-                     context_can.strokeStyle = 'black';
-                     context_can.lineWidth = 3
-                     context_can.fillText("รักแม่", xPos, yPos);
-                     context_can.strokeText("รักแม่", xPos, yPos);
-                     context_can .fill();
-                     context_can.stroke();*/
 
 
-
-                    /*    var imageData2 = $('.image-editor').cropit('export', {
-                     quality: 1
-                     });
-                     var c2 = document.getElementById("canvas1");
-                     var context_can2 = c2.getContext("2d");
-                     var image2 = new Image();
-
-                     image2.onload = function() {
-                     context_can2.clearRect(0, 0, c2.width, c2.height);
-                     context_can2.drawImage(image2, 0, 0);
-                     context_can2.font = "35pt Sriracha";
-                     context_can2.fillStyle = "red"
-                     context_can2.strokeStyle = 'black';
-                     context_can2.lineWidth = 3
-                     context_can2.fillText("รักแม่",xPos, yPos);
-                     context_can2.strokeText("รักแม่",xPos, yPos);
-                     context_can2 .fill();
-                     context_can2.stroke();
-                     };
-                     image2.src = imageData2;*/
-//    event.preventDefault();
-
-                }});
             page.querySelector('#finish-text').onclick = function() {
 
                 document.querySelector('#myNavigator').pushPage('page3.html', {data: {title: 'Page 3'}});
@@ -297,8 +330,8 @@
             context_can.fillStyle = "red";
             context_can.strokeStyle = 'black';
             context_can.lineWidth = 3;
-            context_can.fillText("รักแม่", posX, posY+35);
-            context_can.strokeText("รักแม่", posX, posY+35);
+            context_can.fillText("รักแม่", posX, posY-17);
+            context_can.strokeText("รักแม่", posX, posY-17);
             context_can.fill();
             context_can.stroke();
             var w=window.open('about:blank','image from canvas');
