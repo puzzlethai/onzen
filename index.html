@@ -92,7 +92,6 @@
             <div class="center" style="text-align: center"></div>
         </ons-toolbar>
 
-        <p>This is the second page.</p>
         <!--<div id="dropThis">-->
             <canvas id="canvas1" width="370" height="320" ></canvas>
         <!--</div>-->
@@ -188,8 +187,9 @@
             fn.enableGD();
         }
     });
+    var margin_top = $(".toolbar").css("height");
     window.fn = {}
-    fn.vtop = 0;
+    fn.vtop = margin_top;
     fn.vleft = 0;
     window.fn.enableGD = function(){
         var dragItems = document.querySelectorAll('.draggable');
@@ -218,7 +218,7 @@
                 var margin_top = $(".toolbar").css("height");
                 console.log("x : "+fn.vleft);
                 console.log("y : "+fn.vtop);
-console.log("margin :"+margin_top);
+                console.log("margin :"+margin_top);
 
                 posX =  parseInt(fn.vleft);
                 posY =  parseInt(fn.vtop)-parseInt(margin_top);
