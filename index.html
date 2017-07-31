@@ -120,9 +120,6 @@
             <canvas id="txtCanvas" class="draggable" width="100" height="100" ></canvas>
             <!--</div>-->
         </ons-gesture-detector>
-
-        <ons-button id="finish-text">Finish </ons-button>
-
     </ons-page>
 </ons-template>
 <ons-template id="page4.html">
@@ -340,7 +337,7 @@
             cont_cantext.stroke();
 
 
-            page.querySelector('#finish-text').onclick = function() {
+            page.querySelector('#next-page4').onclick = function() {
 
                 document.querySelector('#myNavigator').pushPage('page4.html', {data: {title: 'Page 4'}});
 
