@@ -30,7 +30,7 @@
 
             </div>
 
-            <div class="center" style="text-align: center">1</div>
+            <div class="center" style="text-align: center">Step 1</div>
             <div class="right">
 
                 <ons-toolbar-button id="next-page2"  disabled >
@@ -89,32 +89,51 @@
     <ons-page id="page2">
         <ons-toolbar>
             <div class="left"><ons-back-button>Back</ons-back-button></div>
-            <div class="center" style="text-align: center"></div>
+            <div class="center" style="text-align: center">Step 2</div>
+            <div class="right">
+            <ons-toolbar-button id="next-page3" >
+                Next &nbsp<i class="zmdi zmdi zmdi-play zmdi-hc-lg"></i>
+            </ons-toolbar-button>
+            </div>
         </ons-toolbar>
-
-        <!--<div id="dropThis">-->
-            <canvas id="canvas1" width="370" height="320" ></canvas>
-        <!--</div>-->
-        <ons-gesture-detector>
-        <!--<div id="dragThis">-->
-            <canvas id="txtCanvas" class="draggable" width="100" height="100" ></canvas>
-        <!--</div>-->
-        </ons-gesture-detector>
-        <button onclick ="showMeImage()">Show Example</button>
-        <ons-button id="finish-text">Finish </ons-button>
+        <canvas id="canvasText" width="100" height="100" ></canvas>
     </ons-page>
 </ons-template>
 <ons-template id="page3.html">
     <ons-page id="page3">
-        <div id="ozone"></div>
+
+        <ons-toolbar>
+            <div class="left"><ons-back-button>Back</ons-back-button></div>
+            <div class="center" style="text-align: center">Step 3</div>
+            <div class="right">
+            <ons-toolbar-button id="next-page4" >
+                Next &nbsp<i class="zmdi zmdi zmdi-play zmdi-hc-lg"></i>
+            </ons-toolbar-button>
+                </div>
+        </ons-toolbar>
+
+        <!--<div id="dropThis">-->
+        <canvas id="canvas1" width="370" height="320" ></canvas>
+        <!--</div>-->
+        <ons-gesture-detector>
+            <!--<div id="dragThis">-->
+            <canvas id="txtCanvas" class="draggable" width="100" height="100" ></canvas>
+            <!--</div>-->
+        </ons-gesture-detector>
+
+        <ons-button id="finish-text">Finish </ons-button>
+
+    </ons-page>
+</ons-template>
+<ons-template id="page4.html">
+    <ons-page id="page4">
         <ons-toolbar>
             <div class="left"><ons-back-button>Back</ons-back-button></div>
             <div class="center"></div>
         </ons-toolbar>
-
+        <canvas id="canvas4" width="370" height="320" ></canvas>
     </ons-page>
 </ons-template>
-
 <script>
     //$(document.body).css('overflow-y', 'hidden');
     var xPos, yPos,posX,posY;
@@ -183,12 +202,12 @@
             });*/
 
     document.addEventListener("show",function(e){
-        if(e.target.id == 'page2'){
+        if(e.target.id == 'page3'){
             fn.enableGD();
         }
     });
     var margin_top = $(".toolbar").css("height");
-    window.fn = {}
+    window.fn = {};
     fn.vtop = margin_top;
     fn.vleft = 0;
     window.fn.enableGD = function(){
@@ -215,13 +234,13 @@
                 fn.vtop = parseInt(e.target.style.top || 0,10);
                 fn.vleft = parseInt(e.target.style.left || 0,10);
 
-                var margin_top = $(".toolbar").css("height");
+
                 console.log("x : "+fn.vleft);
                 console.log("y : "+fn.vtop);
-                console.log("margin :"+margin_top);
+
 
                 posX =  parseInt(fn.vleft);
-                posY =  parseInt(fn.vtop)-parseInt(margin_top);
+                posY =  parseInt(fn.vtop);
                 //document.getElementById('status').value = "Drag End";
             });
         }
@@ -269,6 +288,12 @@
 
         } else if (page.id === 'page2') {
             page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
+            page.querySelector('#next-page3').onclick = function() {
+
+                document.querySelector('#myNavigator').pushPage('page3.html', {data: {title: 'Page 3'}});
+            };
+        } else if (page.id === 'page3') {
+            page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
 
             /* Initialize Firebase
              var config = {
@@ -304,38 +329,59 @@
             var d = document.getElementById("txtCanvas");
             var cont_cantext = d.getContext("2d");
             cont_cantext.textAlign = "left";
-            cont_cantext.textBaseline ="top";
+            cont_cantext.textBaseline ="middle";
             cont_cantext.font = "35pt Sriracha";
             cont_cantext.fillStyle = "red";
             cont_cantext.strokeStyle = 'black';
             cont_cantext.lineWidth = 3;
-            cont_cantext.fillText("รักแม่", 0, 0);
-            cont_cantext.strokeText("รักแม่", 0, 0);
+            cont_cantext.fillText("รักแม่", 0, 50);
+            cont_cantext.strokeText("รักแม่", 0, 50);
             cont_cantext .fill();
             cont_cantext.stroke();
 
 
             page.querySelector('#finish-text').onclick = function() {
 
-                document.querySelector('#myNavigator').pushPage('page3.html', {data: {title: 'Page 3'}});
+                document.querySelector('#myNavigator').pushPage('page4.html', {data: {title: 'Page 4'}});
 
             };
 
-        } else if (page.id === 'page3') {
+        } else if (page.id === 'page4') {
             page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
 
-            context_can.textAlign ="left";
-            context_can.textBaseline ="top";
-            context_can.font = "35pt Sriracha";
-            context_can.fillStyle = "red";
-            context_can.strokeStyle = 'black';
-            context_can.lineWidth = 3;
-            context_can.fillText("รักแม่", posX, posY-17);
-            context_can.strokeText("รักแม่", posX, posY-17);
-            context_can.fill();
-            context_can.stroke();
-            var w=window.open('about:blank','image from canvas');
-            w.document.write("<img src='"+ c.toDataURL("image/png")+"' alt='from canvas'/>")
+
+            c = document.getElementById("canvas4");
+            context_can = c.getContext("2d");
+            image = new Image();
+            image.onload = function() {
+                var margin_top = $(".toolbar").css("height");
+                console.log("margin :"+margin_top);
+                console.log("x : "+posX);
+                console.log("y : "+posY);
+                context_can.drawImage(image, 0, 0);
+                context_can.textAlign ="left";
+                context_can.textBaseline ="middle";
+                context_can.font = "35pt Sriracha";
+                context_can.fillStyle = "red";
+                context_can.strokeStyle = 'black';
+                context_can.lineWidth = 3;
+                context_can.fillText("รักแม่", posX, posY+parseInt(margin_top));
+                context_can.strokeText("รักแม่", posX, posY+parseInt(margin_top));
+                context_can.fill();
+                context_can.stroke();
+                /*                context_can.font = "35pt Sriracha";
+                 context_can.fillStyle = "red"
+                 context_can.strokeStyle = 'black';
+                 context_can.lineWidth = 3
+                 context_can.fillText("รักแม่", 40, 40);
+                 context_can.strokeText("รักแม่", 40, 40);
+                 context_can .fill();
+                 context_can.stroke();*/
+            };
+            image.src = imageData;
+
+/*            var w=window.open('about:blank','image from canvas');
+            w.document.write("<img src='"+ c.toDataURL("image/png")+"' alt='from canvas'/>")*/
         }
     });
 
