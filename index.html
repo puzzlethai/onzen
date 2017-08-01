@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>ONZEN TEST</title>
+<link href="https://fonts.googleapis.com/css?family=Sriracha" rel="stylesheet" type='text/css'>
+
+
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
@@ -11,7 +14,6 @@
     <script src="dist/jquery-ui.js"></script>
     <script src="dist/jquery.ui.touch-punch.min.js"></script>
     <link rel="stylesheet" href="dist/css/app.css">
-    <link href="https://fonts.googleapis.com/css?family=Sriracha" rel="stylesheet" type='text/css'>
 
 </head>
 <body>
@@ -117,7 +119,7 @@
         <!--</div>-->
         <ons-gesture-detector>
             <!--<div id="dragThis">-->
-            <canvas id="txtCanvas" class="draggable" width="100" height="100" ></canvas>
+            <canvas id="txtCanvas" class="draggable" width="100" height="100"  style="position:absolute; top:0px; left:0px"></canvas>
             <!--</div>-->
         </ons-gesture-detector>
     </ons-page>
@@ -205,9 +207,11 @@
     });
     var margin_top = $(".toolbar").css("height");
     window.fn = {};
-    fn.vtop = margin_top;
+//    fn.vtop = parseInt(margin_top);
+    fn.vtop = 0;
     fn.vleft = 0;
     window.fn.enableGD = function(){
+
         var dragItems = document.querySelectorAll('.draggable');
         for (var i = 0; i < dragItems.length; i++) {
             dragItems[i].addEventListener('dragstart', function(e) {
@@ -280,11 +284,26 @@
             });
             page.querySelector('#next-page2').onclick = function() {
 
-                document.querySelector('#myNavigator').pushPage('page2.html', {data: {title: 'Page 2'}});
+                document.querySelector('#myNavigator').pushPage('page2.html', {data: {title: 'Step 2'}});
             };
 
         } else if (page.id === 'page2') {
             page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
+            let d = document.getElementById("canvasText");
+            let cont_cantext = d.getContext("2d");
+            cont_cantext.textAlign = "left";
+            cont_cantext.textBaseline ="top";
+            cont_cantext.font = "35px Sriracha";
+            let fontArgs = cont_cantext.font.split(' ');
+            let newSize = '40px';
+            cont_cantext.font = newSize + ' ' + fontArgs[fontArgs.length - 1];
+            cont_cantext.fillStyle = "red";
+            cont_cantext.strokeStyle = 'black';
+            cont_cantext.lineWidth = 3;
+            cont_cantext.fillText("รักแม่", 0,0);
+            cont_cantext.strokeText("รักแม่", 0,0);
+            cont_cantext .fill();
+            cont_cantext.stroke();
             page.querySelector('#next-page3').onclick = function() {
 
                 document.querySelector('#myNavigator').pushPage('page3.html', {data: {title: 'Page 3'}});
@@ -326,13 +345,16 @@
             var d = document.getElementById("txtCanvas");
             var cont_cantext = d.getContext("2d");
             cont_cantext.textAlign = "left";
-            cont_cantext.textBaseline ="middle";
-            cont_cantext.font = "35pt Sriracha";
+            cont_cantext.textBaseline ="top";
+            cont_cantext.font = "35px Sriracha";
+            var fontArgs = cont_cantext.font.split(' ');
+            var newSize = '40px';
+            cont_cantext.font = newSize + ' ' + fontArgs[fontArgs.length - 1];
             cont_cantext.fillStyle = "red";
             cont_cantext.strokeStyle = 'black';
             cont_cantext.lineWidth = 3;
-            cont_cantext.fillText("รักแม่", 0, 50);
-            cont_cantext.strokeText("รักแม่", 0, 50);
+            cont_cantext.fillText("รักแม่", 0,0);
+            cont_cantext.strokeText("รักแม่", 0,0);
             cont_cantext .fill();
             cont_cantext.stroke();
 
@@ -357,13 +379,16 @@
                 console.log("y : "+posY);
                 context_can.drawImage(image, 0, 0);
                 context_can.textAlign ="left";
-                context_can.textBaseline ="middle";
-                context_can.font = "35pt Sriracha";
+                context_can.textBaseline ="top";
+                context_can.font = "35px Sriracha";
+                var fontArgs2 = context_can.font.split(' ');
+                var newSize2 = '40px';
+                context_can.font = newSize2 + ' ' + fontArgs2[fontArgs2.length - 1];
                 context_can.fillStyle = "red";
                 context_can.strokeStyle = 'black';
                 context_can.lineWidth = 3;
-                context_can.fillText("รักแม่", posX, posY+parseInt(margin_top));
-                context_can.strokeText("รักแม่", posX, posY+parseInt(margin_top));
+                context_can.fillText("รักแม่", posX, posY); // +parseInt(margin_top)
+                context_can.strokeText("รักแม่", posX, posY);
                 context_can.fill();
                 context_can.stroke();
                 /*                context_can.font = "35pt Sriracha";
