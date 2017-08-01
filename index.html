@@ -137,7 +137,8 @@
     //$(document.body).css('overflow-y', 'hidden');
     var xPos, yPos,posX,posY;
     var imageData,c,context_can,image;
-
+posX = 0;
+posY = 0;
 /*        $('#dragThis').draggable(
             {
 
@@ -253,7 +254,7 @@
             $('.image-editor').cropit({
                 smallImage: 'allow',
                 initialZoom: 'image',
-                minZoom: 'fit',
+                minZoom: 'fill', // 'fit'
                 freeMove :true,
                 imageBackground: true,
                 onImageError: function(e) {
