@@ -204,6 +204,27 @@ posY = 0;
     document.addEventListener("show",function(e){
         if(e.target.id == 'page3'){
             fn.enableGD();
+        } else if (e.target.id == 'page2'){
+            console.log("inshow");
+            console.log("clear");
+            var canvas = document.getElementById("canvasText");
+            var ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let d = document.getElementById("canvasText");
+            let cont_cantext = d.getContext("2d");
+            cont_cantext.textAlign = "left";
+            cont_cantext.textBaseline = "top";
+            cont_cantext.font = "35px Sriracha";
+            let fontArgs = cont_cantext.font.split(' ');
+            let newSize = '40px';
+            cont_cantext.font = newSize + ' ' + fontArgs[fontArgs.length - 1];
+            cont_cantext.fillStyle = "red";
+            cont_cantext.strokeStyle = 'black';
+            cont_cantext.lineWidth = 3;
+            cont_cantext.fillText("รักแม่", 0, 0);
+            cont_cantext.strokeText("รักแม่", 0, 0);
+            cont_cantext.fill();
+            cont_cantext.stroke();
         }
     });
     var margin_top = $(".toolbar").css("height");
@@ -290,25 +311,46 @@ posY = 0;
 
         } else if (page.id === 'page2') {
             page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
-            let d = document.getElementById("canvasText");
-            let cont_cantext = d.getContext("2d");
-            cont_cantext.textAlign = "left";
-            cont_cantext.textBaseline ="top";
-            cont_cantext.font = "35px Sriracha";
-            let fontArgs = cont_cantext.font.split(' ');
-            let newSize = '40px';
-            cont_cantext.font = newSize + ' ' + fontArgs[fontArgs.length - 1];
-            cont_cantext.fillStyle = "red";
-            cont_cantext.strokeStyle = 'black';
-            cont_cantext.lineWidth = 3;
-            cont_cantext.fillText("รักแม่", 0,0);
-            cont_cantext.strokeText("รักแม่", 0,0);
-            cont_cantext .fill();
-            cont_cantext.stroke();
+            function page2draw() {
+                console.log("draw");
+                let d = document.getElementById("canvasText");
+                let cont_cantext = d.getContext("2d");
+                cont_cantext.textAlign = "left";
+                cont_cantext.textBaseline = "top";
+                cont_cantext.font = "35px Sriracha";
+                let fontArgs = cont_cantext.font.split(' ');
+                let newSize = '40px';
+                cont_cantext.font = newSize + ' ' + fontArgs[fontArgs.length - 1];
+                cont_cantext.fillStyle = "red";
+                cont_cantext.strokeStyle = 'black';
+                cont_cantext.lineWidth = 3;
+                cont_cantext.fillText("รักแม่", 0, 0);
+                cont_cantext.strokeText("รักแม่", 0, 0);
+                cont_cantext.fill();
+                cont_cantext.stroke();
+            }
+            function page2clear() {
+                console.log("clear");
+                var canvas = document.getElementById("canvasText");
+                var ctx = canvas.getContext("2d");
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
             page.querySelector('#next-page3').onclick = function() {
 
                 document.querySelector('#myNavigator').pushPage('page3.html', {data: {title: 'Page 3'}});
             };
+            page2draw();
+
+
+           /* page2draw();
+            page2clear();
+            page2draw();
+            page2clear();
+            page2draw();
+            page2clear();
+            page2draw();*/
+
+
         } else if (page.id === 'page3') {
             page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
 
