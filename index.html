@@ -24,13 +24,6 @@
     <ons-page id="page1">
 
         <ons-toolbar >
-            <div class="left">
-
-                <!--            <ons-toolbar-button id="load-image" >
-                                 <i class="zmdi zmdi zmdi-face "> Load Image</i>
-                            </ons-toolbar-button>-->
-
-            </div>
 
             <div class="center" style="text-align: center">Step 1</div>
             <div class="right">
@@ -46,7 +39,6 @@
             <ons-row >
 
                 <label class="fileContainer">
-                    Upload File
                     <input type="file" class="cropit-image-input"/>
                 </label>
 
@@ -57,19 +49,6 @@
                 <div class="cropit-preview"></div>
 
             </ons-row>
-
-
-            <!-- The actual file input will be hidden -->
-
-            <!-- And clicking on this button will open up select file dialog -->
-            <!--<div class="select-image-btn">-->
-
-            <!--<ons-button id="load-image">
-                <ons-icon icon="md-face"></ons-icon>
-                Load Image
-            </ons-button>-->
-            <!--</div>-->
-
 
 
             <table >
@@ -139,78 +118,34 @@
     var imageData,c,context_can,image;
 posX = 0;
 posY = 0;
-/*        $('#dragThis').draggable(
-            {
-
-                drag: function () {
-                    //console.log("in on drag");
-                    var offset = $(this).offset();
-                    xPos = offset.left;
-                    yPos = offset.top;
-                    // console.log("xPos -->"+xPos+"  yPos -->"+yPos);
-//                $('#posX').text('x: ' + xPos);
-//                $('#posY').text('y: ' + yPos);
-                }
-            });*/
-/*        $('#dropThis').droppable(
-            {
-                drop: function () {
-                    console.log("in on drop");
-                    var margin_top = $(".toolbar").css("height");
-                    // alert("margin_top = "+margin_top);
-
-                    console.log("xPos -->" + xPos + "  yPos -->" + yPos);
-                    var eTop = $('#canvas1').offset().top;//-$(window).scrollTop();
-                    var eLeft = $('#canvas1').offset().left;//-$(window).scrollLeft();
-                    console.log("eTop -->" + eTop + "eLeft -->" + eLeft);
-                    posX = xPos - eLeft;
-                    posY = yPos - eTop - parseInt(margin_top);
-                    console.log("xPos -->" + posX + "  yPos -->" + posY);
-                    /!*        context_can.font = "35pt Sriracha";
-             context_can.fillStyle = "red"
-             context_can.strokeStyle = 'black';
-             context_can.lineWidth = 3
-             context_can.fillText("รักแม่", xPos, yPos);
-             context_can.strokeText("รักแม่", xPos, yPos);
-             context_can .fill();
-             context_can.stroke();*!/
-
-
-                    /!*    var imageData2 = $('.image-editor').cropit('export', {
-             quality: 1
-             });
-             var c2 = document.getElementById("canvas1");
-             var context_can2 = c2.getContext("2d");
-             var image2 = new Image();
-
-             image2.onload = function() {
-             context_can2.clearRect(0, 0, c2.width, c2.height);
-             context_can2.drawImage(image2, 0, 0);
-             context_can2.font = "35pt Sriracha";
-             context_can2.fillStyle = "red"
-             context_can2.strokeStyle = 'black';
-             context_can2.lineWidth = 3
-             context_can2.fillText("รักแม่",xPos, yPos);
-             context_can2.strokeText("รักแม่",xPos, yPos);
-             context_can2 .fill();
-             context_can2.stroke();
-             };
-             image2.src = imageData2;*!/
-//    event.preventDefault();
-
-                }
-            });*/
-
+    function clearCanvas(canvasName){
+        let canvas =document.getElementById(canvasName);
+        let ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    function drawText(wordIng,canvasName,textColor,strokeColor,fontSize='40px',fontName='Sriracha',xPos='0',yPos='0'){
+        let canvas =document.getElementById(canvasName);
+        let ctx = canvas.getContext("2d");
+        ctx.textAlign = "left";
+        ctx.textBaseline = "top";
+        ctx.font = fontSize + ' '+ fontName;
+        ctx.fillStyle = textColor;
+        ctx.strokeStyle = strokeColor;
+        ctx.lineWidth = 3;
+        ctx.fillText(wordIng, xPos, yPos);
+        ctx.strokeText(wordIng, xPos, yPos);
+        ctx.fill();
+        ctx.stroke();
+    }
     document.addEventListener("show",function(e){
         if(e.target.id == 'page3'){
             fn.enableGD();
-        } else if (e.target.id == 'page2'){
-            console.log("inshow");
-            console.log("clear");
-            var canvas = document.getElementById("canvasText");
-            var ctx = canvas.getContext("2d");
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            let d = document.getElementById("canvasText");
+        } else if (e.target.id == 'page2'){ // make font show correct
+
+
+            clearCanvas("canvasText");
+            drawText("รักแม่","canvasText","red","black","40px","Sriracha",0,0);
+/*            let d = document.getElementById("canvasText");
             let cont_cantext = d.getContext("2d");
             cont_cantext.textAlign = "left";
             cont_cantext.textBaseline = "top";
@@ -224,7 +159,7 @@ posY = 0;
             cont_cantext.fillText("รักแม่", 0, 0);
             cont_cantext.strokeText("รักแม่", 0, 0);
             cont_cantext.fill();
-            cont_cantext.stroke();
+            cont_cantext.stroke();*/
         }
     });
     var margin_top = $(".toolbar").css("height");
@@ -313,7 +248,8 @@ posY = 0;
             page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
             function page2draw() {
                 console.log("draw");
-                let d = document.getElementById("canvasText");
+                drawText("รักแม่","canvasText","red","black","40px","Sriracha",0,0);
+               /* let d = document.getElementById("canvasText");
                 let cont_cantext = d.getContext("2d");
                 cont_cantext.textAlign = "left";
                 cont_cantext.textBaseline = "top";
@@ -327,14 +263,9 @@ posY = 0;
                 cont_cantext.fillText("รักแม่", 0, 0);
                 cont_cantext.strokeText("รักแม่", 0, 0);
                 cont_cantext.fill();
-                cont_cantext.stroke();
+                cont_cantext.stroke();*/
             }
-            function page2clear() {
-                console.log("clear");
-                var canvas = document.getElementById("canvasText");
-                var ctx = canvas.getContext("2d");
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }
+
             page.querySelector('#next-page3').onclick = function() {
 
                 document.querySelector('#myNavigator').pushPage('page3.html', {data: {title: 'Page 3'}});
@@ -385,7 +316,8 @@ posY = 0;
                  context_can.stroke();*/
             };
             image.src = imageData;
-            var d = document.getElementById("txtCanvas");
+            drawText("รักแม่","txtCanvas","red","black","40px","Sriracha",0,0);
+/*            var d = document.getElementById("txtCanvas");
             var cont_cantext = d.getContext("2d");
             cont_cantext.textAlign = "left";
             cont_cantext.textBaseline ="top";
@@ -399,7 +331,7 @@ posY = 0;
             cont_cantext.fillText("รักแม่", 0,0);
             cont_cantext.strokeText("รักแม่", 0,0);
             cont_cantext .fill();
-            cont_cantext.stroke();
+            cont_cantext.stroke();*/
 
 
             page.querySelector('#next-page4').onclick = function() {
@@ -421,7 +353,8 @@ posY = 0;
                 console.log("x : "+posX);
                 console.log("y : "+posY);
                 context_can.drawImage(image, 0, 0);
-                context_can.textAlign ="left";
+                drawText("รักแม่","canvas4","red","black","40px","Sriracha",posX,posY);
+/*                context_can.textAlign ="left";
                 context_can.textBaseline ="top";
                 context_can.font = "35px Sriracha";
                 var fontArgs2 = context_can.font.split(' ');
@@ -433,7 +366,7 @@ posY = 0;
                 context_can.fillText("รักแม่", posX, posY); // +parseInt(margin_top)
                 context_can.strokeText("รักแม่", posX, posY);
                 context_can.fill();
-                context_can.stroke();
+                context_can.stroke();*/
                 /*                context_can.font = "35pt Sriracha";
                  context_can.fillStyle = "red"
                  context_can.strokeStyle = 'black';
