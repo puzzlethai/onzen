@@ -78,6 +78,7 @@
             </div>
         </ons-toolbar>
         <canvas id="canvasText" width="100" height="100" ></canvas>
+        <input type="color" value="#ff00ff" />
     </ons-page>
 </ons-template>
 <ons-template id="page3.html">
@@ -145,21 +146,7 @@ posY = 0;
 
             clearCanvas("canvasText");
             drawText("รักแม่","canvasText","red","black","40px","Sriracha",0,0);
-/*            let d = document.getElementById("canvasText");
-            let cont_cantext = d.getContext("2d");
-            cont_cantext.textAlign = "left";
-            cont_cantext.textBaseline = "top";
-            cont_cantext.font = "35px Sriracha";
-            let fontArgs = cont_cantext.font.split(' ');
-            let newSize = '40px';
-            cont_cantext.font = newSize + ' ' + fontArgs[fontArgs.length - 1];
-            cont_cantext.fillStyle = "red";
-            cont_cantext.strokeStyle = 'black';
-            cont_cantext.lineWidth = 3;
-            cont_cantext.fillText("รักแม่", 0, 0);
-            cont_cantext.strokeText("รักแม่", 0, 0);
-            cont_cantext.fill();
-            cont_cantext.stroke();*/
+
         }
     });
     var margin_top = $(".toolbar").css("height");
@@ -174,7 +161,7 @@ posY = 0;
             dragItems[i].addEventListener('dragstart', function(e) {
                 fn.vtop = parseInt(e.target.style.top || 0,10);
                 fn.vleft = parseInt(e.target.style.left || 0,10);
-                // document.getElementById('status').value = "Drag Start";
+
             });
             dragItems[i].addEventListener('drag', function(e) {
                 e.target.style.top = parseInt(fn.vtop + e.gesture.deltaY) + 'px';
@@ -199,7 +186,7 @@ posY = 0;
 
                 posX =  parseInt(fn.vleft);
                 posY =  parseInt(fn.vtop);
-                //document.getElementById('status').value = "Drag End";
+
             });
         }
     }
@@ -219,20 +206,10 @@ posY = 0;
                 onImageLoaded: function(ev){
                     $('#next-page2').attr('disabled', false);  // make Next button Enable
                 }
-            }); // ,            imageBackgroundBorderWidth: 15
+            });
             // $('.image-editor').cropit('previewSize', { width: 370, height: 320 });
             $('.image-editor').cropit();
-            $('#btn').click(function () {
-                $('#fileupload').click();
-            });
-            /*            $('.select-image-btn').click(function() {
 
-                            $('.cropit-image-input').click();
-
-                        });*/
-            /*            page.querySelector('#load-image').onclick = function() {
-                            $('.cropit-image-input').click();
-                        };*/
             $('.rotate-cw').click(function() {
                 $('.image-editor').cropit('rotateCW');
             });
@@ -248,22 +225,8 @@ posY = 0;
             page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
             function page2draw() {
                 console.log("draw");
-                drawText("รักแม่","canvasText","red","black","40px","Sriracha",0,0);
-               /* let d = document.getElementById("canvasText");
-                let cont_cantext = d.getContext("2d");
-                cont_cantext.textAlign = "left";
-                cont_cantext.textBaseline = "top";
-                cont_cantext.font = "35px Sriracha";
-                let fontArgs = cont_cantext.font.split(' ');
-                let newSize = '40px';
-                cont_cantext.font = newSize + ' ' + fontArgs[fontArgs.length - 1];
-                cont_cantext.fillStyle = "red";
-                cont_cantext.strokeStyle = 'black';
-                cont_cantext.lineWidth = 3;
-                cont_cantext.fillText("รักแม่", 0, 0);
-                cont_cantext.strokeText("รักแม่", 0, 0);
-                cont_cantext.fill();
-                cont_cantext.stroke();*/
+                drawText("รักแม่","canvasText","red","black");
+
             }
 
             page.querySelector('#next-page3').onclick = function() {
@@ -317,21 +280,6 @@ posY = 0;
             };
             image.src = imageData;
             drawText("รักแม่","txtCanvas","red","black","40px","Sriracha",0,0);
-/*            var d = document.getElementById("txtCanvas");
-            var cont_cantext = d.getContext("2d");
-            cont_cantext.textAlign = "left";
-            cont_cantext.textBaseline ="top";
-            cont_cantext.font = "35px Sriracha";
-            var fontArgs = cont_cantext.font.split(' ');
-            var newSize = '40px';
-            cont_cantext.font = newSize + ' ' + fontArgs[fontArgs.length - 1];
-            cont_cantext.fillStyle = "red";
-            cont_cantext.strokeStyle = 'black';
-            cont_cantext.lineWidth = 3;
-            cont_cantext.fillText("รักแม่", 0,0);
-            cont_cantext.strokeText("รักแม่", 0,0);
-            cont_cantext .fill();
-            cont_cantext.stroke();*/
 
 
             page.querySelector('#next-page4').onclick = function() {
@@ -354,27 +302,7 @@ posY = 0;
                 console.log("y : "+posY);
                 context_can.drawImage(image, 0, 0);
                 drawText("รักแม่","canvas4","red","black","40px","Sriracha",posX,posY);
-/*                context_can.textAlign ="left";
-                context_can.textBaseline ="top";
-                context_can.font = "35px Sriracha";
-                var fontArgs2 = context_can.font.split(' ');
-                var newSize2 = '40px';
-                context_can.font = newSize2 + ' ' + fontArgs2[fontArgs2.length - 1];
-                context_can.fillStyle = "red";
-                context_can.strokeStyle = 'black';
-                context_can.lineWidth = 3;
-                context_can.fillText("รักแม่", posX, posY); // +parseInt(margin_top)
-                context_can.strokeText("รักแม่", posX, posY);
-                context_can.fill();
-                context_can.stroke();*/
-                /*                context_can.font = "35pt Sriracha";
-                 context_can.fillStyle = "red"
-                 context_can.strokeStyle = 'black';
-                 context_can.lineWidth = 3
-                 context_can.fillText("รักแม่", 40, 40);
-                 context_can.strokeText("รักแม่", 40, 40);
-                 context_can .fill();
-                 context_can.stroke();*/
+
             };
             image.src = imageData;
 
