@@ -166,6 +166,10 @@
     }
     function drawText(wordIng,canvasName,textColor,strokeColor,fontSize='40px',fontName='Sriracha',xPos='0',yPos='0'){
         let canvas =document.getElementById(canvasName);
+
+        if ((canvasName === 'canvasText')&&(strokeColor=== 'white')){
+            canvas.style.background ='black';
+        } else {canvas.style.background='transparent'}
         let ctx = canvas.getContext("2d");
         ctx.textAlign = "left";
         ctx.textBaseline = "top";
