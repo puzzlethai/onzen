@@ -86,8 +86,8 @@
                     <ons-list-header>ขนาด</ons-list-header>
                     <ons-list-item tappable>
                         <ons-select id="choose-size" onchange="sizeSelects(event)">
-                            <option value="30px" >เล็ก </option>
-                            <option value="40px">กลาง</option>
+                            <option value="30px">เล็ก </option>
+                            <option value="40px" selected>กลาง</option>
                             <option value="50px">ใหญ่</option>
                         </ons-select>
                     </ons-list-item>
@@ -193,10 +193,10 @@
         ctx.font = fontSize + ' '+ fontName;
         ctx.fillStyle = textColor;
         ctx.strokeStyle = strokeColor;
-        if (strokeColor ==='white') {
-            ctx.lineWidth = 1;
-        } else {
+        if ((strokeColor ==='black')&& (fontSize==='40px'||(fontSize==='50px'))) {
             ctx.lineWidth = 2;
+        } else {
+            ctx.lineWidth = 1;
         }
         ctx.fillText(wordIng, xPos, yPos);
         ctx.strokeText(wordIng, xPos, yPos);
