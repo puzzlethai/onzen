@@ -110,8 +110,8 @@
                     <ons-list-header>ขอบ</ons-list-header>
                     <ons-list-item tappable>
                         <ons-select id="choose-stroke" onchange="strokeSelects(event)">
-                            <option value="black">BLACK</option>
-                            <option value="white">WHITE</option>
+                            <option value="black">ดำ</option>
+                            <option value="white">ขาว</option>
                         </ons-select>
                     </ons-list-item>
                 </ons-list>
@@ -193,7 +193,7 @@
         ctx.font = fontSize + ' '+ fontName;
         ctx.fillStyle = textColor;
         ctx.strokeStyle = strokeColor;
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 1;
         ctx.fillText(wordIng, xPos, yPos);
         ctx.strokeText(wordIng, xPos, yPos);
         ctx.fill();
