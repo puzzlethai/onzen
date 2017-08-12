@@ -81,9 +81,19 @@
         <ons-col>
         <canvas id="canvasText" width="100" height="100" ></canvas>
         </ons-col>
-            <ons-col width="2%">
+            <ons-col width="20%">
+                <ons-list modifier="material">
+                    <ons-list-header>เลือกขนาด</ons-list-header>
+                    <ons-list-item tappable>
+                        <ons-select id="choose-size" onchange="sizeSelects(event)">
+                            <option value="30px" ><div style="color: red">เล็ก </div></option>
+                            <option value="40px"><div style="color: yellow">กลาง</div></option>
+                            <option value="50px"><div style="color: blue">ใหญ่</div></option>
+                        </ons-select>
+                    </ons-list-item>
+                </ons-list>
             </ons-col>
-            <ons-col width="30%">
+            <ons-col width="20%">
                 <ons-list modifier="material">
                     <ons-list-header>เลือกสี</ons-list-header>
                     <ons-list-item tappable>
@@ -97,7 +107,7 @@
             </ons-col>
             <ons-col width="2%">
             </ons-col>
-            <ons-col width="30%">
+            <ons-col width="20%">
         <ons-list modifier="material">
             <ons-list-header>สีขอบ</ons-list-header>
             <ons-list-item tappable>
@@ -157,7 +167,7 @@
     //$(document.body).css('overflow-y', 'hidden');
     var posX =0,posY=0;
     var imageData,c,context_can,image;
-    var txtColor = 'red',borderColor ='black';
+    var txtColor = 'red',borderColor ='black',txtSize='40px';
 
     function clearCanvas(canvasName){
         let canvas =document.getElementById(canvasName);
@@ -185,7 +195,12 @@
     function colorSelects(event) {
         txtColor = event.target.value;
         clearCanvas("canvasText");
-        drawText("รักแม่","canvasText",txtColor,borderColor,"40px","Sriracha",0,0);
+        drawText("รักแม่","canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
+    }
+    function sizeSelects(event) {
+        txtSize = event.target.value;
+        clearCanvas("canvasText");
+        drawText("รักแม่","canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
     }
     document.addEventListener("show",function(e){
         if(e.target.id == 'page3'){
@@ -194,7 +209,7 @@
 
 
             clearCanvas("canvasText");
-            drawText("รักแม่","canvasText",txtColor,borderColor,"40px","Sriracha",0,0);
+            drawText("รักแม่","canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
 
         }
     });
@@ -275,7 +290,7 @@
             function page2draw() {
                 clearCanvas("canvasText");
                 console.log("draw");
-                drawText("รักแม่","canvasText",txtColor,borderColor);
+                drawText("รักแม่","canvasText",txtColor,borderColor,txtSize);
 
             }
 
@@ -289,14 +304,14 @@
 
                 borderColor ='white';
                 clearCanvas("canvasText");
-                drawText("รักแม่","canvasText",txtColor,borderColor);
+                drawText("รักแม่","canvasText",txtColor,borderColor,txtSize);
               console.log("in 2 change") ;
             };
             page.querySelector('#radio-1').onclick = function(){
 
                 borderColor ='black';
                 clearCanvas("canvasText");
-                drawText("รักแม่","canvasText",txtColor,borderColor);
+                drawText("รักแม่","canvasText",txtColor,borderColor,txtSize);
                 console.log("in 1 change") ;
             }
             /* page2draw();
