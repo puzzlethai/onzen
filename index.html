@@ -112,6 +112,7 @@
                         <ons-select id="choose-stroke" onchange="strokeSelects(event)">
                             <option value="black">ดำ</option>
                             <option value="white">ขาว</option>
+                            <option value="none">ไม่มี</option>
                         </ons-select>
                     </ons-list-item>
                 </ons-list>
@@ -214,7 +215,8 @@
         drawText("รักแม่","canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
     }
     function strokeSelects(event) {
-        borderColor = event.target.value;
+        if (event.target.value==='none'){ borderColor = txtColor } // No border
+        else {borderColor = event.target.value;}
         clearCanvas("canvasText");
         drawText("รักแม่","canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
     }
