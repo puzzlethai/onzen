@@ -25,7 +25,7 @@
 
         <ons-toolbar >
 
-            <div class="center" style="text-align: center">Step 1</div>
+            <div class="center" style="text-align: center">เลือกรูป</div>
             <div class="right">
 
                 <ons-toolbar-button id="next-page2"  disabled >
@@ -70,7 +70,7 @@
     <ons-page id="page2">
         <ons-toolbar>
             <div class="left"><ons-back-button>Back</ons-back-button></div>
-            <div class="center" style="text-align: center">Step 2</div>
+            <div class="center" style="text-align: center">เลือกสี</div>
             <div class="right">
             <ons-toolbar-button id="next-page3" >
                 Next &nbsp<i class="zmdi zmdi zmdi-play zmdi-hc-lg"></i>
@@ -144,7 +144,7 @@
 
         <ons-toolbar>
             <div class="left"><ons-back-button>Back</ons-back-button></div>
-            <div class="center" style="text-align: center">Step 3</div>
+            <div class="center" style="text-align: center">เลือกตำแหน่ง</div>
             <div class="right">
             <ons-toolbar-button id="next-page4" >
                 Next &nbsp<i class="zmdi zmdi zmdi-play zmdi-hc-lg"></i>
@@ -153,7 +153,7 @@
         </ons-toolbar>
 
         <!--<div id="dropThis">-->
-        <canvas id="canvas1" width="370" height="320" ></canvas>
+        <canvas id="cavasPIC" width="370" height="320" ></canvas>
         <!--</div>-->
         <ons-gesture-detector>
             <!--<div id="dragThis">-->
@@ -168,7 +168,7 @@
             <div class="left"><ons-back-button>Back</ons-back-button></div>
             <div class="center"></div>
         </ons-toolbar>
-        <canvas id="canvas4" width="370" height="320" ></canvas>
+        <canvas id="canvasPV" width="370" height="320" ></canvas>
     </ons-page>
 </ons-template>
 <script>
@@ -187,7 +187,11 @@
 
         if ((canvasName === 'canvasText')&&(strokeColor=== 'white')){
             canvas.style.background ='black';
-        } else {canvas.style.background='transparent'}
+            canvas.style.borderColor ='red';
+        } else {
+            canvas.style.background='transparent';
+            canvas.style.borderColor ='red';
+        }
         let ctx = canvas.getContext("2d");
         ctx.textAlign = "left";
         ctx.textBaseline = "top";
@@ -300,7 +304,7 @@
             });
             page.querySelector('#next-page2').onclick = function() {
 
-                document.querySelector('#myNavigator').pushPage('page2.html', {data: {title: 'Step 2'}});
+                document.querySelector('#myNavigator').pushPage('page2.html', {data: {title: 'เลือกสี'}});
             };
 
         } else if (page.id === 'page2') {
@@ -314,7 +318,7 @@
 
             page.querySelector('#next-page3').onclick = function() {
 
-                document.querySelector('#myNavigator').pushPage('page3.html', {data: {title: 'Page 3'}});
+                document.querySelector('#myNavigator').pushPage('page3.html', {data: {title: 'เลือกตำแหน่ง'}});
             };
             page2draw();
 
@@ -360,7 +364,7 @@
                 quality: 1
             });
 
-            c = document.getElementById("canvas1");
+            c = document.getElementById("cavasPIC");
             context_can = c.getContext("2d");
             image = new Image();
             image.onload = function() {
@@ -380,7 +384,7 @@
 
             page.querySelector('#next-page4').onclick = function() {
 
-                document.querySelector('#myNavigator').pushPage('page4.html', {data: {title: 'Page 4'}});
+                document.querySelector('#myNavigator').pushPage('page4.html', {data: {title: 'พรีวิว'}});
 
             };
 
@@ -388,7 +392,7 @@
             page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
 
 
-            c = document.getElementById("canvas4");
+            c = document.getElementById("canvasPV");
             context_can = c.getContext("2d");
             image = new Image();
             image.onload = function() {
@@ -397,7 +401,7 @@
                 console.log("x : "+posX);
                 console.log("y : "+posY);
                 context_can.drawImage(image, 0, 0);
-                drawText("รักแม่","canvas4",txtColor,borderColor,txtSize,"Sriracha",posX,posY);
+                drawText("รักแม่","canvasPV",txtColor,borderColor,txtSize,"Sriracha",posX,posY);
 
             };
             image.src = imageData;
