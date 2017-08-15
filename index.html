@@ -28,7 +28,7 @@
             <div class="center" style="text-align: center">เลือกรูป</div>
             <div class="right">
 
-                <ons-toolbar-button id="next-page2"  disabled >
+                <ons-toolbar-button id="next-page3"  disabled >
                     Next &nbsp<i class="zmdi zmdi zmdi-play zmdi-hc-lg"></i>
                 </ons-toolbar-button>
             </div>
@@ -66,13 +66,13 @@
     </ons-page>
 </ons-template>
 
-<ons-template id="page2.html">
-    <ons-page id="page2">
+<ons-template id="page3.html">
+    <ons-page id="page3">
         <ons-toolbar>
             <div class="left"><ons-back-button>Back</ons-back-button></div>
             <div class="center" style="text-align: center">เลือกสี</div>
             <div class="right">
-            <ons-toolbar-button id="next-page3" >
+            <ons-toolbar-button id="next-page4" >
                 Next &nbsp<i class="zmdi zmdi zmdi-play zmdi-hc-lg"></i>
             </ons-toolbar-button>
             </div>
@@ -139,14 +139,14 @@
         </ons-row>
     </ons-page>
 </ons-template>
-<ons-template id="page3.html">
-    <ons-page id="page3">
+<ons-template id="page4.html">
+    <ons-page id="page4">
 
         <ons-toolbar>
             <div class="left"><ons-back-button>Back</ons-back-button></div>
             <div class="center" style="text-align: center">เลือกตำแหน่ง</div>
             <div class="right">
-            <ons-toolbar-button id="next-page4" >
+            <ons-toolbar-button id="next-page5" >
                 Next &nbsp<i class="zmdi zmdi zmdi-play zmdi-hc-lg"></i>
             </ons-toolbar-button>
                 </div>
@@ -162,8 +162,8 @@
         </ons-gesture-detector>
     </ons-page>
 </ons-template>
-<ons-template id="page4.html">
-    <ons-page id="page4">
+<ons-template id="page5.html">
+    <ons-page id="page5">
         <ons-toolbar>
             <div class="left"><ons-back-button>Back</ons-back-button></div>
             <div class="center"></div>
@@ -175,7 +175,7 @@
     //$(document.body).css('overflow-y', 'hidden');
     var posX =0,posY=0;
     var imageData,c,context_can,image;
-    var txtColor = 'red',borderColor ='black',txtSize='40px';
+    var txtColor = 'red',borderColor ='black',txtSize='40px',no_border = false;
 
     function clearCanvas(canvasName){
         let canvas =document.getElementById(canvasName);
@@ -188,9 +188,12 @@
         if ((canvasName === 'canvasText')&&(strokeColor=== 'white')){
             canvas.style.background ='black';
             canvas.style.borderColor ='red';
-        } else {
+        } else if (strokeColor ==='black'){
             canvas.style.background='transparent';
             canvas.style.borderColor ='red';
+        } else { // none sure
+            canvas.style.backgroud ='transparent';
+            strokeColor =textColor;
         }
         let ctx = canvas.getContext("2d");
         ctx.textAlign = "left";
@@ -219,15 +222,17 @@
         drawText("รักแม่","canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
     }
     function strokeSelects(event) {
-        if (event.target.value==='none'){ borderColor = txtColor } // No border
+        if (event.target.value==='none'){
+            borderColor = txtColor;
+            no_border = true; } // No border
         else {borderColor = event.target.value;}
         clearCanvas("canvasText");
         drawText("รักแม่","canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
     }
     document.addEventListener("show",function(e){
-        if(e.target.id == 'page3'){
+        if(e.target.id == 'page4'){
             fn.enableGD();
-        } else if (e.target.id == 'page2'){ // make font show correct
+        } else if (e.target.id == 'page3'){ // make font show correct
 
 
             clearCanvas("canvasText");
@@ -290,7 +295,7 @@
                     ons.notification.alert(e.message);
                 },
                 onImageLoaded: function(ev){
-                    $('#next-page2').attr('disabled', false);  // make Next button Enable
+                    $('#next-page3').attr('disabled', false);  // make Next button Enable
                 }
             });
             // $('.image-editor').cropit('previewSize', { width: 370, height: 320 });
@@ -302,25 +307,25 @@
             $('.rotate-ccw').click(function() {
                 $('.image-editor').cropit('rotateCCW');
             });
-            page.querySelector('#next-page2').onclick = function() {
+            page.querySelector('#next-page3').onclick = function() {
 
-                document.querySelector('#myNavigator').pushPage('page2.html', {data: {title: 'เลือกสี'}});
+                document.querySelector('#myNavigator').pushPage('page3.html', {data: {title: 'เลือกสี'}});
             };
 
-        } else if (page.id === 'page2') {
+        } else if (page.id === 'page3') {
             page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
-            function page2draw() {
+            function page3draw() {
                 clearCanvas("canvasText");
                 console.log("draw");
                 drawText("รักแม่","canvasText",txtColor,borderColor,txtSize);
 
             }
 
-            page.querySelector('#next-page3').onclick = function() {
+            page.querySelector('#next-page4').onclick = function() {
 
-                document.querySelector('#myNavigator').pushPage('page3.html', {data: {title: 'เลือกตำแหน่ง'}});
+                document.querySelector('#myNavigator').pushPage('page4.html', {data: {title: 'เลือกตำแหน่ง'}});
             };
-            page2draw();
+            page3draw();
 
 /*            page.querySelector('#radio-2').onclick = function(){
 
@@ -345,7 +350,7 @@
              page2draw();*/
 
 
-        } else if (page.id === 'page3') {
+        } else if (page.id === 'page4') {
             page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
 
             /* Initialize Firebase
@@ -382,13 +387,13 @@
             drawText("รักแม่","txtCanvas",txtColor,borderColor,txtSize,"Sriracha",0,0);
 
 
-            page.querySelector('#next-page4').onclick = function() {
+            page.querySelector('#next-page5').onclick = function() {
 
-                document.querySelector('#myNavigator').pushPage('page4.html', {data: {title: 'พรีวิว'}});
+                document.querySelector('#myNavigator').pushPage('page5.html', {data: {title: 'พรีวิว'}});
 
             };
 
-        } else if (page.id === 'page4') {
+        } else if (page.id === 'page5') {
             page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
 
 
