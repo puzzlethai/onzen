@@ -76,7 +76,31 @@
             </ons-toolbar-button>
             </div>
         </ons-toolbar>
-        <ons-input id="yourtext" modifier="underbar" placeholder="ใส่ข้อความตรงนี้" float></ons-input>
+        <table>
+            <tr>
+            <td>ข้อความ 1: </td>
+            <td>
+        <ons-input id="yourtext0" modifier="underbar" placeholder="ใส่ข้อความตรงนี้" float></ons-input>
+            </td>
+            </tr>
+            <tr>
+                <td>ข้อความ 2: </td>
+                <td>
+        <ons-input id="yourtext1" modifier="underbar" placeholder="ใส่ข้อความตรงนี้" float></ons-input>
+                </td>
+            </tr>
+            <tr>
+                <td>ข้อความ 3:</td>
+                <td>
+        <ons-input id="yourtext2" modifier="underbar" placeholder="ใส่ข้อความตรงนี้" float></ons-input>
+                </td>
+            </tr>
+            <td>ข้อความ 4:</td>
+       <td>
+        <ons-input id="yourtext3" modifier="underbar" placeholder="ใส่ข้อความตรงนี้" float></ons-input>
+       </td>
+        </tr>
+        </table>
     </ons-page>
 </ons-template>
 <ons-template id="page3.html">
@@ -171,7 +195,7 @@
     var posX =0,posY=0;
     var imageData,c,context_can,image;
     var txtColor = 'red',borderColor ='black',txtSize='40px',no_border = false;
-    var txt1 ='',txt2 = '',txt3 = '', txt4 ='';
+    var txt =['','','',''];
 
     function clearCanvas(canvasName){
         let canvas =document.getElementById(canvasName);
@@ -210,12 +234,12 @@
     function colorSelects(event) {
         txtColor = event.target.value;
         clearCanvas("canvasText");
-        drawText(txt1,"canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
+        drawText(txt[0],"canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
     }
     function sizeSelects(event) {
         txtSize = event.target.value;
         clearCanvas("canvasText");
-        drawText(txt1,"canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
+        drawText(txt[0],"canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
     }
     function strokeSelects(event) {
         if (event.target.value==='none'){
@@ -223,7 +247,7 @@
             no_border = true; } // No border
         else {borderColor = event.target.value;}
         clearCanvas("canvasText");
-        drawText(txt1,"canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
+        drawText(txt[0],"canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
     }
     document.addEventListener("show",function(e){
         if(e.target.id == 'page4'){
@@ -232,7 +256,7 @@
 
 
             clearCanvas("canvasText");
-            drawText(txt1,"canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
+            drawText(txt[0],"canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
 
         }
     });
@@ -312,7 +336,7 @@
 
 
             page.querySelector('#next-page3').onclick = function() {
-            txt1 = document.getElementById('yourtext').value;
+            txt[0] = document.getElementById('yourtext0').value;
                 document.querySelector('#myNavigator').pushPage('page3.html');
             };
 
@@ -321,7 +345,7 @@
             function page3draw() {
                 clearCanvas("canvasText");
                 console.log("draw");
-                drawText(txt1,"canvasText",txtColor,borderColor,txtSize);
+                drawText(txt[0],"canvasText",txtColor,borderColor,txtSize);
 
             }
 
@@ -381,7 +405,7 @@
 
             };
             image.src = imageData;
-            drawText(txt1,"txtCanvas",txtColor,borderColor,txtSize,"Sriracha",0,0);
+            drawText(txt[0],"txtCanvas",txtColor,borderColor,txtSize,"Sriracha",0,0);
 
 
             page.querySelector('#next-page5').onclick = function() {
@@ -403,7 +427,7 @@
                 console.log("x : "+posX);
                 console.log("y : "+posY);
                 context_can.drawImage(image, 0, 0);
-                drawText(txt1,"canvasPV",txtColor,borderColor,txtSize,"Sriracha",posX,posY);
+                drawText(txt[0],"canvasPV",txtColor,borderColor,txtSize,"Sriracha",posX,posY);
 
             };
             image.src = imageData;
