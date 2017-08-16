@@ -28,7 +28,7 @@
             <div class="center" style="text-align: center">เลือกรูป</div>
             <div class="right">
 
-                <ons-toolbar-button id="next-page3"  disabled >
+                <ons-toolbar-button id="next-page2"  disabled >
                     Next &nbsp<i class="zmdi zmdi zmdi-play zmdi-hc-lg"></i>
                 </ons-toolbar-button>
             </div>
@@ -65,7 +65,20 @@
 
     </ons-page>
 </ons-template>
-
+<ons-template id="page2.html">
+    <ons-page id="page2">
+        <ons-toolbar>
+            <div class="left"><ons-back-button>Back</ons-back-button></div>
+            <div class="center" style="text-align: center">ใส่ข้อความ</div>
+            <div class="right">
+            <ons-toolbar-button id="next-page3" >
+                Next &nbsp<i class="zmdi zmdi zmdi-play zmdi-hc-lg"></i>
+            </ons-toolbar-button>
+            </div>
+        </ons-toolbar>
+        <ons-input id="yourtext" modifier="underbar" placeholder="ใส่ข้อความตรงนี้" float></ons-input>
+    </ons-page>
+</ons-template>
 <ons-template id="page3.html">
     <ons-page id="page3">
         <ons-toolbar>
@@ -116,25 +129,7 @@
                         </ons-select>
                     </ons-list-item>
                 </ons-list>
-       <!-- <ons-list modifier="material">
-            <ons-list-header>ขอบ</ons-list-header>
-            <ons-list-item tappable>
-                <label class="left">
-                    <ons-radio name="color" input-id="radio-1" checked></ons-radio>
-                </label>
-                <label for="radio-1" class="center">
-                    ดำ
-                </label>
-            </ons-list-item>
-            <ons-list-item id="radioBlue" tappable>
-                <label class="left">
-                    <ons-radio name="color" input-id="radio-2"></ons-radio>
-                </label>
-                <label for="radio-2" class="center">
-                    ขาว
-                </label>
-            </ons-list-item>
-        </ons-list>-->
+
             </ons-col>
         </ons-row>
     </ons-page>
@@ -176,6 +171,7 @@
     var posX =0,posY=0;
     var imageData,c,context_can,image;
     var txtColor = 'red',borderColor ='black',txtSize='40px',no_border = false;
+    var txt1 ='',txt2 = '',txt3 = '', txt4 ='';
 
     function clearCanvas(canvasName){
         let canvas =document.getElementById(canvasName);
@@ -214,12 +210,12 @@
     function colorSelects(event) {
         txtColor = event.target.value;
         clearCanvas("canvasText");
-        drawText("รักแม่","canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
+        drawText(txt1,"canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
     }
     function sizeSelects(event) {
         txtSize = event.target.value;
         clearCanvas("canvasText");
-        drawText("รักแม่","canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
+        drawText(txt1,"canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
     }
     function strokeSelects(event) {
         if (event.target.value==='none'){
@@ -227,7 +223,7 @@
             no_border = true; } // No border
         else {borderColor = event.target.value;}
         clearCanvas("canvasText");
-        drawText("รักแม่","canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
+        drawText(txt1,"canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
     }
     document.addEventListener("show",function(e){
         if(e.target.id == 'page4'){
@@ -236,7 +232,7 @@
 
 
             clearCanvas("canvasText");
-            drawText("รักแม่","canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
+            drawText(txt1,"canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
 
         }
     });
@@ -295,7 +291,7 @@
                     ons.notification.alert(e.message);
                 },
                 onImageLoaded: function(ev){
-                    $('#next-page3').attr('disabled', false);  // make Next button Enable
+                    $('#next-page2').attr('disabled', false);  // make Next button Enable
                 }
             });
             // $('.image-editor').cropit('previewSize', { width: 370, height: 320 });
@@ -307,17 +303,25 @@
             $('.rotate-ccw').click(function() {
                 $('.image-editor').cropit('rotateCCW');
             });
-            page.querySelector('#next-page3').onclick = function() {
+            page.querySelector('#next-page2').onclick = function() {
 
-                document.querySelector('#myNavigator').pushPage('page3.html', {data: {title: 'เลือกสี'}});
+                document.querySelector('#myNavigator').pushPage('page2.html');
+            };
+
+        } else if (page.id === 'page2') {
+
+
+            page.querySelector('#next-page3').onclick = function() {
+            txt1 = document.getElementById('yourtext').value;
+                document.querySelector('#myNavigator').pushPage('page3.html');
             };
 
         } else if (page.id === 'page3') {
-            page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
+
             function page3draw() {
                 clearCanvas("canvasText");
                 console.log("draw");
-                drawText("รักแม่","canvasText",txtColor,borderColor,txtSize);
+                drawText(txt1,"canvasText",txtColor,borderColor,txtSize);
 
             }
 
@@ -374,17 +378,10 @@
             image = new Image();
             image.onload = function() {
                 context_can.drawImage(image, 0, 0);
-                /*                context_can.font = "35pt Sriracha";
-                 context_can.fillStyle = "red"
-                 context_can.strokeStyle = 'black';
-                 context_can.lineWidth = 3
-                 context_can.fillText("รักแม่", 40, 40);
-                 context_can.strokeText("รักแม่", 40, 40);
-                 context_can .fill();
-                 context_can.stroke();*/
+
             };
             image.src = imageData;
-            drawText("รักแม่","txtCanvas",txtColor,borderColor,txtSize,"Sriracha",0,0);
+            drawText(txt1,"txtCanvas",txtColor,borderColor,txtSize,"Sriracha",0,0);
 
 
             page.querySelector('#next-page5').onclick = function() {
@@ -406,7 +403,7 @@
                 console.log("x : "+posX);
                 console.log("y : "+posY);
                 context_can.drawImage(image, 0, 0);
-                drawText("รักแม่","canvasPV",txtColor,borderColor,txtSize,"Sriracha",posX,posY);
+                drawText(txt1,"canvasPV",txtColor,borderColor,txtSize,"Sriracha",posX,posY);
 
             };
             image.src = imageData;
