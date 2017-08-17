@@ -36,8 +36,9 @@ canvas {
     border: 1px solid gray;
 }
 ons-input input {
-    width: 60%;
+    width: 50%;
     font-size: 30px !important;
+    height: 50px !important;
 }
 /*input.cropit-image-input {
     visibility: hidden;
