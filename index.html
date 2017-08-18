@@ -342,7 +342,8 @@
 </ons-template>
 <script>
     //$(document.body).css('overflow-y', 'hidden');
-    var posX =0,posY=0;
+    var posX = [0,230,0,230];
+    var posY = [0,0,220,220];
     var imageData,c,context_can,image;
     var txtColor = ['red','red','red','red'];
     var borderColor =['black','black','black','black'];
@@ -460,8 +461,8 @@
                 console.log("y : "+fn.vtop);
 
 
-                posX =  parseInt(fn.vleft);
-                posY =  parseInt(fn.vtop);
+                posX[i] =  parseInt(fn.vleft);
+                posY[i] =  parseInt(fn.vtop);
 
             });
         }
@@ -584,7 +585,10 @@
                 console.log("x : "+posX);
                 console.log("y : "+posY);
                 context_can.drawImage(image, 0, 0);
-                drawText(txt[0],"canvasPV",txtColor[parseInt(num)],borderColor[parseInt(num)],txtSize[parseInt(num)],"Sriracha",posX,posY);
+                drawText(txt[0],"canvasPV",txtColor[0],borderColor[0],txtSize[0],"Sriracha",posX[0],posY[0]);
+                drawText(txt[1],"canvasPV",txtColor[1],borderColor[1],txtSize[1],"Sriracha",posX[1],posY[1]);
+                drawText(txt[2],"canvasPV",txtColor[2],borderColor[2],txtSize[2],"Sriracha",posX[2],posY[2]);
+                drawText(txt[3],"canvasPV",txtColor[3],borderColor[3],txtSize[3],"Sriracha",posX[3],posY[3]);
 
             };
             image.src = imageData;
