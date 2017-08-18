@@ -137,13 +137,13 @@
         </ons-toolbar>
         <ons-row>
         <ons-col>
-        <canvas id="canvasText" width="140" height="100" ></canvas>
+        <canvas id="canvasText0" width="140" height="100" ></canvas>
         </ons-col>
             <ons-col width="24%">
                 <ons-list modifier="material">
                     <ons-list-header>ขนาด</ons-list-header>
                     <ons-list-item tappable>
-                        <ons-select id="choose-size" onchange="sizeSelects(event)">
+                        <ons-select id="choose-size" onchange="sizeSelects(event,'0')">
                             <option value="30px">เล็ก </option>
                             <option value="40px" selected>กลาง</option>
                             <option value="50px">ใหญ่</option>
@@ -155,7 +155,7 @@
                 <ons-list modifier="material">
                     <ons-list-header>สี</ons-list-header>
                     <ons-list-item tappable>
-                <ons-select id="choose-color" onchange="colorSelects(event)">
+                <ons-select id="choose-color" onchange="colorSelects(event,'0')">
                     <option value="red" ><div style="color: red">แดง</div></option>
                     <option value="green"><div style="color: green">เขียว</div></option>
                     <option value="blue"><div style="color: blue">น้ำเงิน</div></option>
@@ -167,7 +167,7 @@
                 <ons-list modifier="material">
                     <ons-list-header>ขอบ</ons-list-header>
                     <ons-list-item tappable>
-                        <ons-select id="choose-stroke" onchange="strokeSelects(event)">
+                        <ons-select id="choose-stroke" onchange="strokeSelects(event,'0')">
                             <option value="black">ดำ</option>
                             <option value="white">ขาว</option>
                             <option value="none">ไม่มี</option>
@@ -197,7 +197,7 @@
         <!--</div>-->
         <ons-gesture-detector>
             <!--<div id="dragThis">-->
-            <canvas id="txtCanvas" class="draggable" width="140" height="100"  style="position:absolute; top:0px; left:0px"></canvas>
+            <canvas id="txtCanvas0" class="draggable" width="140" height="100"  style="position:absolute; top:0px; left:0px;"></canvas>
             <!--</div>-->
         </ons-gesture-detector>
     </ons-page>
@@ -218,6 +218,10 @@
     var txtColor = 'red',borderColor ='black',txtSize='40px',no_border = false;
     var txt =['','','',''];
 
+    function setBorderCanvas(canvasName,color){
+        let canvas =document.getElementById(canvasName);
+        canvas.style.borderColor =color;
+    }
     function clearCanvas(canvasName){
         let canvas =document.getElementById(canvasName);
         let ctx = canvas.getContext("2d");
@@ -226,12 +230,12 @@
     function drawText(wordIng,canvasName,textColor,strokeColor='black',fontSize='40px',fontName='Sriracha',xPos='0',yPos='0'){
         let canvas =document.getElementById(canvasName);
 
-        if ((canvasName === 'canvasText')&&(strokeColor=== 'white')){
+        if ((canvasName === 'canvasText0')&&(strokeColor=== 'white')){
             canvas.style.background ='black';
-            canvas.style.borderColor ='red';
+            //canvas.style.borderColor ='red';
         } else if (strokeColor ==='black'){
             canvas.style.background='transparent';
-            canvas.style.borderColor ='red';
+            //canvas.style.borderColor ='red';
         } else { // none sure
             canvas.style.backgroud ='transparent';
             strokeColor =textColor;
@@ -252,32 +256,33 @@
         ctx.fill();
         ctx.stroke();
     }
-    function colorSelects(event) {
+    function colorSelects(event,num) {
         txtColor = event.target.value;
-        clearCanvas("canvasText");
-        drawText(txt[0],"canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
+        clearCanvas("canvasText"+num);
+        drawText(txt[parseInt(num)],"canvasText"+num,txtColor,borderColor,txtSize,"Sriracha",0,0);
     }
-    function sizeSelects(event) {
+    function sizeSelects(event,num) {
         txtSize = event.target.value;
-        clearCanvas("canvasText");
-        drawText(txt[0],"canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
+        clearCanvas("canvasText"+num);
+        drawText(txt[parseInt(num)],"canvasText"+num,txtColor,borderColor,txtSize,"Sriracha",0,0);
     }
-    function strokeSelects(event) {
+    function strokeSelects(event,num) {
         if (event.target.value==='none'){
             borderColor = txtColor;
             no_border = true; } // No border
         else {borderColor = event.target.value;}
-        clearCanvas("canvasText");
-        drawText(txt[0],"canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
+        clearCanvas("canvasText"+num);
+        drawText(txt[parseInt(num)],"canvasText"+num,txtColor,borderColor,txtSize,"Sriracha",0,0);
     }
     document.addEventListener("show",function(e){
         if(e.target.id == 'page4'){
+
             fn.enableGD();
         } else if (e.target.id == 'page3'){ // make font show correct
 
 
-            clearCanvas("canvasText");
-            drawText(txt[0],"canvasText",txtColor,borderColor,txtSize,"Sriracha",0,0);
+            clearCanvas("canvasText0");
+            drawText(txt[0],"canvasText0",txtColor,borderColor,txtSize,"Sriracha",0,0);
 
         }
     });
@@ -364,9 +369,9 @@
         } else if (page.id === 'page3') {
 
             function page3draw() {
-                clearCanvas("canvasText");
+                clearCanvas("canvasText0");
                 console.log("draw");
-                drawText(txt[0],"canvasText",txtColor,borderColor,txtSize);
+                drawText(txt[0],"canvasText0",txtColor,borderColor,txtSize);
 
             }
 
@@ -376,20 +381,7 @@
             };
             page3draw();
 
-/*            page.querySelector('#radio-2').onclick = function(){
 
-                borderColor ='white';
-                clearCanvas("canvasText");
-                drawText("รักแม่","canvasText",txtColor,borderColor,txtSize);
-              console.log("in 2 change") ;
-            };
-            page.querySelector('#radio-1').onclick = function(){
-
-                borderColor ='black';
-                clearCanvas("canvasText");
-                drawText("รักแม่","canvasText",txtColor,borderColor,txtSize);
-                console.log("in 1 change") ;
-            }*/
             /* page2draw();
              page2clear();
              page2draw();
@@ -426,7 +418,8 @@
 
             };
             image.src = imageData;
-            drawText(txt[0],"txtCanvas",txtColor,borderColor,txtSize,"Sriracha",0,0);
+            setBorderCanvas("txtCanvas0",'red');
+            drawText(txt[0],"txtCanvas0",txtColor,borderColor,txtSize,"Sriracha",0,0);
 
 
             page.querySelector('#next-page5').onclick = function() {
