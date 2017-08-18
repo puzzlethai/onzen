@@ -143,7 +143,7 @@
                 <ons-list modifier="material">
                     <ons-list-header>ขนาด</ons-list-header>
                     <ons-list-item tappable>
-                        <ons-select id="choose-size" onchange="sizeSelects(event,'0')">
+                        <ons-select id="choose-size0" onchange="sizeSelects(event,'0')">
                             <option value="30px">เล็ก </option>
                             <option value="40px" selected>กลาง</option>
                             <option value="50px">ใหญ่</option>
@@ -155,7 +155,7 @@
                 <ons-list modifier="material">
                     <ons-list-header>สี</ons-list-header>
                     <ons-list-item tappable>
-                <ons-select id="choose-color" onchange="colorSelects(event,'0')">
+                <ons-select id="choose-color0" onchange="colorSelects(event,'0')">
                     <option value="red" ><div style="color: red">แดง</div></option>
                     <option value="green"><div style="color: green">เขียว</div></option>
                     <option value="blue"><div style="color: blue">น้ำเงิน</div></option>
@@ -167,7 +167,133 @@
                 <ons-list modifier="material">
                     <ons-list-header>ขอบ</ons-list-header>
                     <ons-list-item tappable>
-                        <ons-select id="choose-stroke" onchange="strokeSelects(event,'0')">
+                        <ons-select id="choose-stroke0" onchange="strokeSelects(event,'0')">
+                            <option value="black">ดำ</option>
+                            <option value="white">ขาว</option>
+                            <option value="none">ไม่มี</option>
+                        </ons-select>
+                    </ons-list-item>
+                </ons-list>
+
+            </ons-col>
+        </ons-row>
+        <ons-row>
+            <ons-col>
+                <canvas id="canvasText1" width="140" height="100" ></canvas>
+            </ons-col>
+            <ons-col width="24%">
+                <ons-list modifier="material">
+                    <ons-list-header>ขนาด</ons-list-header>
+                    <ons-list-item tappable>
+                        <ons-select id="choose-size1" onchange="sizeSelects(event,'1')">
+                            <option value="30px">เล็ก </option>
+                            <option value="40px" selected>กลาง</option>
+                            <option value="50px">ใหญ่</option>
+                        </ons-select>
+                    </ons-list-item>
+                </ons-list>
+            </ons-col>
+            <ons-col width="20%">
+                <ons-list modifier="material">
+                    <ons-list-header>สี</ons-list-header>
+                    <ons-list-item tappable>
+                        <ons-select id="choose-color1" onchange="colorSelects(event,'1')">
+                            <option value="red" ><div style="color: red">แดง</div></option>
+                            <option value="green"><div style="color: green">เขียว</div></option>
+                            <option value="blue"><div style="color: blue">น้ำเงิน</div></option>
+                        </ons-select>
+                    </ons-list-item>
+                </ons-list>
+            </ons-col>
+            <ons-col width="16%">
+                <ons-list modifier="material">
+                    <ons-list-header>ขอบ</ons-list-header>
+                    <ons-list-item tappable>
+                        <ons-select id="choose-stroke1" onchange="strokeSelects(event,'1')">
+                            <option value="black">ดำ</option>
+                            <option value="white">ขาว</option>
+                            <option value="none">ไม่มี</option>
+                        </ons-select>
+                    </ons-list-item>
+                </ons-list>
+
+            </ons-col>
+        </ons-row>
+        <ons-row>
+            <ons-col>
+                <canvas id="canvasText2" width="140" height="100" ></canvas>
+            </ons-col>
+            <ons-col width="24%">
+                <ons-list modifier="material">
+                    <ons-list-header>ขนาด</ons-list-header>
+                    <ons-list-item tappable>
+                        <ons-select id="choose-size2" onchange="sizeSelects(event,'2')">
+                            <option value="30px">เล็ก </option>
+                            <option value="40px" selected>กลาง</option>
+                            <option value="50px">ใหญ่</option>
+                        </ons-select>
+                    </ons-list-item>
+                </ons-list>
+            </ons-col>
+            <ons-col width="20%">
+                <ons-list modifier="material">
+                    <ons-list-header>สี</ons-list-header>
+                    <ons-list-item tappable>
+                        <ons-select id="choose-color2" onchange="colorSelects(event,'2')">
+                            <option value="red" ><div style="color: red">แดง</div></option>
+                            <option value="green"><div style="color: green">เขียว</div></option>
+                            <option value="blue"><div style="color: blue">น้ำเงิน</div></option>
+                        </ons-select>
+                    </ons-list-item>
+                </ons-list>
+            </ons-col>
+            <ons-col width="16%">
+                <ons-list modifier="material">
+                    <ons-list-header>ขอบ</ons-list-header>
+                    <ons-list-item tappable>
+                        <ons-select id="choose-stroke2" onchange="strokeSelects(event,'2')">
+                            <option value="black">ดำ</option>
+                            <option value="white">ขาว</option>
+                            <option value="none">ไม่มี</option>
+                        </ons-select>
+                    </ons-list-item>
+                </ons-list>
+
+            </ons-col>
+        </ons-row>
+        <ons-row>
+            <ons-col>
+                <canvas id="canvasText3" width="140" height="100" ></canvas>
+            </ons-col>
+            <ons-col width="24%">
+                <ons-list modifier="material">
+                    <ons-list-header>ขนาด</ons-list-header>
+                    <ons-list-item tappable>
+                        <ons-select id="choose-size3" onchange="sizeSelects(event,'3')">
+                            <option value="30px">เล็ก </option>
+                            <option value="40px" selected>กลาง</option>
+                            <option value="50px">ใหญ่</option>
+                        </ons-select>
+                    </ons-list-item>
+                </ons-list>
+            </ons-col>
+            <ons-col width="20%">
+                <ons-list modifier="material">
+                    <ons-list-header>สี</ons-list-header>
+                    <ons-list-item tappable>
+                        <ons-select id="choose-color3" onchange="colorSelects(event,'3')">
+                            <option value="red" ><div style="color: red">แดง</div></option>
+                            <option value="green"><div style="color: green">เขียว</div></option>
+                            <option value="blue"><div style="color: blue">น้ำเงิน</div></option>
+                        </ons-select>
+                    </ons-list-item>
+                </ons-list>
+            </ons-col>
+            <ons-col width="16%">
+                <ons-list modifier="material">
+                    <ons-list-header>ขอบ</ons-list-header>
+                    <ons-list-item tappable>
+                        <ons-select id="choose-stroke3" onchange="strokeSelects(event,'3')">
                             <option value="black">ดำ</option>
                             <option value="white">ขาว</option>
                             <option value="none">ไม่มี</option>
@@ -198,6 +324,9 @@
         <ons-gesture-detector>
             <!--<div id="dragThis">-->
             <canvas id="txtCanvas0" class="draggable" width="140" height="100"  style="position:absolute; top:0px; left:0px;"></canvas>
+            <canvas id="txtCanvas1" class="draggable" width="140" height="100"  style="position:absolute; top:0px; left:230px;"></canvas>
+            <canvas id="txtCanvas2" class="draggable" width="140" height="100"  style="position:absolute; top:220px; left:0px;"></canvas>
+            <canvas id="txtCanvas3" class="draggable" width="140" height="100"  style="position:absolute; top:220px; left:230px;"></canvas>
             <!--</div>-->
         </ons-gesture-detector>
     </ons-page>
@@ -215,7 +344,10 @@
     //$(document.body).css('overflow-y', 'hidden');
     var posX =0,posY=0;
     var imageData,c,context_can,image;
-    var txtColor = 'red',borderColor ='black',txtSize='40px',no_border = false;
+    var txtColor = ['red','red','red','red'];
+    var borderColor =['black','black','black','black'];
+    var txtSize = ['40px','40px','40px','40px'];
+    var no_border = false;
     var txt =['','','',''];
 
     function setBorderCanvas(canvasName,color){
@@ -230,7 +362,7 @@
     function drawText(wordIng,canvasName,textColor,strokeColor='black',fontSize='40px',fontName='Sriracha',xPos='0',yPos='0'){
         let canvas =document.getElementById(canvasName);
 
-        if ((canvasName === 'canvasText0')&&(strokeColor=== 'white')){
+        if ((canvasName.substring(0, canvasName.length - 1) === 'canvasText')&&(strokeColor=== 'white')){
             canvas.style.background ='black';
             //canvas.style.borderColor ='red';
         } else if (strokeColor ==='black'){
@@ -257,22 +389,29 @@
         ctx.stroke();
     }
     function colorSelects(event,num) {
-        txtColor = event.target.value;
+        txtColor[parseInt(num)] = event.target.value;
         clearCanvas("canvasText"+num);
-        drawText(txt[parseInt(num)],"canvasText"+num,txtColor,borderColor,txtSize,"Sriracha",0,0);
+        drawText(txt[parseInt(num)],"canvasText"+num,txtColor[parseInt(num)],borderColor[parseInt(num)],txtSize[parseInt(num)],"Sriracha",0,0);
     }
     function sizeSelects(event,num) {
-        txtSize = event.target.value;
+        txtSize[parseInt(num)] = event.target.value;
         clearCanvas("canvasText"+num);
-        drawText(txt[parseInt(num)],"canvasText"+num,txtColor,borderColor,txtSize,"Sriracha",0,0);
+        drawText(txt[parseInt(num)],"canvasText"+num,txtColor[parseInt(num)],borderColor[parseInt(num)],txtSize[parseInt(num)],"Sriracha",0,0);
     }
     function strokeSelects(event,num) {
         if (event.target.value==='none'){
-            borderColor = txtColor;
+            borderColor[parseInt(num)] = txtColor[parseInt(num)];
             no_border = true; } // No border
-        else {borderColor = event.target.value;}
+        else {borderColor[parseInt(num)] = event.target.value;}
         clearCanvas("canvasText"+num);
-        drawText(txt[parseInt(num)],"canvasText"+num,txtColor,borderColor,txtSize,"Sriracha",0,0);
+        drawText(txt[parseInt(num)],"canvasText"+num,txtColor[parseInt(num)],borderColor[parseInt(num)],txtSize[parseInt(num)],"Sriracha",0,0);
+    }
+    function page3draw() {
+        for (num = 0; num < txtColor.length; num++) {
+            clearCanvas("canvasText"+num.toString());
+            console.log("draw");
+            drawText(txt[num.toString()], "canvasText"+num.toString(), txtColor[num], borderColor[num], txtSize[num]);
+        }
     }
     document.addEventListener("show",function(e){
         if(e.target.id == 'page4'){
@@ -280,10 +419,10 @@
             fn.enableGD();
         } else if (e.target.id == 'page3'){ // make font show correct
 
-
-            clearCanvas("canvasText0");
-            drawText(txt[0],"canvasText0",txtColor,borderColor,txtSize,"Sriracha",0,0);
-
+          page3draw();
+           /* clearCanvas("canvasText0");
+            drawText(txt[0],"canvasText0",txtColor[parseInt(num)],borderColor[parseInt(num)],txtSize[parseInt(num)],"Sriracha",0,0);
+*/
         }
     });
     var margin_top = $(".toolbar").css("height");
@@ -363,17 +502,15 @@
 
             page.querySelector('#next-page3').onclick = function() {
             txt[0] = document.getElementById('yourtext0').value;
+            txt[1] = document.getElementById('yourtext1').value;
+            txt[2] = document.getElementById('yourtext2').value;
+            txt[3] = document.getElementById('yourtext3').value;
                 document.querySelector('#myNavigator').pushPage('page3.html');
             };
 
         } else if (page.id === 'page3') {
 
-            function page3draw() {
-                clearCanvas("canvasText0");
-                console.log("draw");
-                drawText(txt[0],"canvasText0",txtColor,borderColor,txtSize);
 
-            }
 
             page.querySelector('#next-page4').onclick = function() {
 
@@ -419,7 +556,13 @@
             };
             image.src = imageData;
             setBorderCanvas("txtCanvas0",'red');
-            drawText(txt[0],"txtCanvas0",txtColor,borderColor,txtSize,"Sriracha",0,0);
+            setBorderCanvas("txtCanvas1",'blue');
+            setBorderCanvas("txtCanvas2",'green');
+            setBorderCanvas("txtCanvas3",'orange');
+            drawText(txt[0],"txtCanvas0",txtColor[0],borderColor[0],txtSize[0],"Sriracha",0,0);
+            drawText(txt[1],"txtCanvas1",txtColor[1],borderColor[1],txtSize[1],"Sriracha",0,0);
+            drawText(txt[2],"txtCanvas2",txtColor[2],borderColor[2],txtSize[2],"Sriracha",0,0);
+            drawText(txt[3],"txtCanvas3",txtColor[3],borderColor[3],txtSize[3],"Sriracha",0,0);
 
 
             page.querySelector('#next-page5').onclick = function() {
@@ -441,7 +584,7 @@
                 console.log("x : "+posX);
                 console.log("y : "+posY);
                 context_can.drawImage(image, 0, 0);
-                drawText(txt[0],"canvasPV",txtColor,borderColor,txtSize,"Sriracha",posX,posY);
+                drawText(txt[0],"canvasPV",txtColor[parseInt(num)],borderColor[parseInt(num)],txtSize[parseInt(num)],"Sriracha",posX,posY);
 
             };
             image.src = imageData;
