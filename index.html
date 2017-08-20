@@ -418,6 +418,7 @@
         if(e.target.id == 'page4'){
 
             fn.enableGD();
+
         } else if (e.target.id == 'page3'){ // make font show correct
 
           page3draw();
@@ -427,14 +428,228 @@
         }
     });
     var margin_top = $(".toolbar").css("height");
-    window.fn = {};
+
+/*    var eak0 = window.fn;   // ลองเปลี่ยนแค่ fn เป็น fn 1 และกัน
+         eak0 = {};
+    var dragItems = [];
+    dragItems[0] = document.getElementById('txtCanvas0');
+    dragItems[1] = document.getElementById('txtCanvas1');
+    dragItems[2] = document.getElementById('txtCanvas2');
+    dragItems[3] = document.getElementById('txtCanvas3');
+    eak0.enableGD = function() {
+
+        eak0.vtop = posY[0];
+        eak0.vleft = posX[0];
+        dragItems[0].addEventListener('dragstart', function (e) {
+            eak0.vtop = parseInt(e.target.style.top || 0, 10);
+            eak0.vleft = parseInt(e.target.style.left || 0, 10);
+
+        });
+        dragItems[0].addEventListener('drag', function (e) {
+            e.target.style.top = parseInt(eak0.vtop + e.gesture.deltaY) + 'px';
+
+            e.target.style.left = parseInt(eak0.vleft + e.gesture.deltaX) + 'px';
+
+
+        });
+        dragItems[0].addEventListener('dragend', function (e) {
+            // THIS EVENT IS NOT REQUIRED UNLESS YOU ARE DETECTING DROP
+            eak0.vtop = parseInt(e.target.style.top || 0, 10);
+            eak0.vleft = parseInt(e.target.style.left || 0, 10);
+
+            posX[0] = parseInt(eak0.vleft);
+            posY[0] = parseInt(eak0.vtop);
+            console.log("x[0] : " + posX[0]);
+            console.log("y[0] : " + posY[0]);
+        });
+    }
+    var eak1 = window.fn;
+    eak1 = {};
+    eak1.enableGD = function() {
+        eak1.vtop = posY[1];
+        eak1.vleft = posX[1];
+        dragItems[1].addEventListener('dragstart', function (e) {
+            eak1.vtop = parseInt(e.target.style.top || 0, 10);
+            eak1.vleft = parseInt(e.target.style.left || 0, 10);
+
+        });
+        dragItems[1].addEventListener('drag', function (e) {
+            e.target.style.top = parseInt(eak1.vtop + e.gesture.deltaY) + 'px';
+
+            e.target.style.left = parseInt(eak1.vleft + e.gesture.deltaX) + 'px';
+
+
+        });
+        dragItems[1].addEventListener('dragend', function (e) {
+            // THIS EVENT IS NOT REQUIRED UNLESS YOU ARE DETECTING DROP
+            eak1.vtop = parseInt(e.target.style.top || 0, 10);
+            eak1.vleft = parseInt(e.target.style.left || 0, 10);
+
+            posX[1] = parseInt(eak1.vleft);
+            posY[1] = parseInt(eak1.vtop);
+            console.log("x[1] : " + posX[1]);
+            console.log("y[1] : " + posY[1]);
+        });
+    }
+    var eak2 = window.fn;
+    eak2 = {};
+    eak2.enableGD = function() {
+        eak2.vtop = posY[2];
+        eak2.vleft = posX[2];
+        dragItems[2].addEventListener('dragstart', function (e) {
+            eak2.vtop = parseInt(e.target.style.top || 0, 10);
+            eak2.vleft = parseInt(e.target.style.left || 0, 10);
+
+        });
+        dragItems[2].addEventListener('drag', function (e) {
+            e.target.style.top = parseInt(eak2.vtop + e.gesture.deltaY) + 'px';
+
+            e.target.style.left = parseInt(eak2.vleft + e.gesture.deltaX) + 'px';
+
+
+        });
+        dragItems[2].addEventListener('dragend', function (e) {
+            // THIS EVENT IS NOT REQUIRED UNLESS YOU ARE DETECTING DROP
+            eak2.vtop = parseInt(e.target.style.top || 0, 10);
+            eak2.vleft = parseInt(e.target.style.left || 0, 10);
+
+            posX = parseInt(eak2.vleft);
+            posY = parseInt(eak2.vtop);
+            console.log("x[2] : " + posX[2]);
+            console.log("y[2] : " + posY[2]);
+        });
+    }
+    var eak3 = window.fn;
+    eak3 = {};
+    eak3.enableGD = function(){
+        eak3.vtop = posY[3];
+        eak3.vleft = posX[3];
+        dragItems[3].addEventListener('dragstart', function(e) {
+            eak3.vtop = parseInt(e.target.style.top || 0,10);
+            eak3.vleft = parseInt(e.target.style.left || 0,10);
+
+        });
+        dragItems[3].addEventListener('drag', function(e) {
+            e.target.style.top = parseInt(eak3.vtop + e.gesture.deltaY) + 'px';
+
+            e.target.style.left = parseInt(eak3.vleft + e.gesture.deltaX) + 'px';
+
+
+        });
+        dragItems[3].addEventListener('dragend', function(e) {
+            // THIS EVENT IS NOT REQUIRED UNLESS YOU ARE DETECTING DROP
+            eak3.vtop = parseInt(e.target.style.top || 0,10);
+            eak3.vleft = parseInt(e.target.style.left || 0,10);
+
+            posX[3] =  parseInt(eak3.vleft);
+            posY[3] =  parseInt(eak3.vtop);
+            console.log("x[3] : "+posX[3]);
+            console.log("y[3] : "+posY[3]);
+        });
+    }*/
+
 //    fn.vtop = parseInt(margin_top);
+    window.fn = {};
     fn.vtop = 0;
     fn.vleft = 0;
-    window.fn.enableGD = function(){
+   window.fn.enableGD = function(){
+        var dragItems = [];
+        dragItems[0] = document.getElementById('txtCanvas0');
+        dragItems[1] = document.getElementById('txtCanvas1');
+        dragItems[2] = document.getElementById('txtCanvas2');
+        dragItems[3] = document.getElementById('txtCanvas3');
+       dragItems[0].addEventListener('dragstart', function (e) {
+           fn.vtop = parseInt(e.target.style.top || 0, 10);
+           fn.vleft = parseInt(e.target.style.left || 0, 10);
 
-        var dragItems = document.querySelectorAll('.draggable');
-        for (var i = 0; i < dragItems.length; i++) {
+       });
+       dragItems[0].addEventListener('drag', function (e) {
+           e.target.style.top = parseInt(fn.vtop + e.gesture.deltaY) + 'px';
+
+           e.target.style.left = parseInt(fn.vleft + e.gesture.deltaX) + 'px';
+
+
+       });
+       dragItems[0].addEventListener('dragend', function (e) {
+           // THIS EVENT IS NOT REQUIRED UNLESS YOU ARE DETECTING DROP
+           fn.vtop = parseInt(e.target.style.top || 0, 10);
+           fn.vleft = parseInt(e.target.style.left || 0, 10);
+
+           posX[0] = parseInt(fn.vleft);
+           posY[0] = parseInt(fn.vtop);
+           console.log("x[0] : " + posX[0]);
+           console.log("y[0] : " + posY[0]);
+       });
+       dragItems[1].addEventListener('dragstart', function (e) {
+           fn.vtop = parseInt(e.target.style.top || 0, 10);
+           fn.vleft = parseInt(e.target.style.left || 0, 10);
+
+       });
+       dragItems[1].addEventListener('drag', function (e) {
+           e.target.style.top = parseInt(fn.vtop + e.gesture.deltaY) + 'px';
+
+           e.target.style.left = parseInt(fn.vleft + e.gesture.deltaX) + 'px';
+
+
+       });
+       dragItems[1].addEventListener('dragend', function (e) {
+           // THIS EVENT IS NOT REQUIRED UNLESS YOU ARE DETECTING DROP
+           fn.vtop = parseInt(e.target.style.top || 0, 10);
+           fn.vleft = parseInt(e.target.style.left || 0, 10);
+
+           posX[1] = parseInt(fn.vleft);
+           posY[1] = parseInt(fn.vtop);
+           console.log("x[1] : " + posX[1]);
+           console.log("y[1] : " + posY[1]);
+       });
+       dragItems[2].addEventListener('dragstart', function (e) {
+           fn.vtop = parseInt(e.target.style.top || 0, 10);
+           fn.vleft = parseInt(e.target.style.left || 0, 10);
+
+       });
+       dragItems[2].addEventListener('drag', function (e) {
+           e.target.style.top = parseInt(fn.vtop + e.gesture.deltaY) + 'px';
+
+           e.target.style.left = parseInt(fn.vleft + e.gesture.deltaX) + 'px';
+
+
+       });
+       dragItems[2].addEventListener('dragend', function (e) {
+           // THIS EVENT IS NOT REQUIRED UNLESS YOU ARE DETECTING DROP
+           fn.vtop = parseInt(e.target.style.top || 0, 10);
+           fn.vleft = parseInt(e.target.style.left || 0, 10);
+
+           posX[2] = parseInt(fn.vleft);
+           posY[2] = parseInt(fn.vtop);
+           console.log("x[2] : " + posX[2]);
+           console.log("y[2] : " + posY[2]);
+       });
+       dragItems[3].addEventListener('dragstart', function (e) {
+           fn.vtop = parseInt(e.target.style.top || 0, 10);
+           fn.vleft = parseInt(e.target.style.left || 0, 10);
+
+       });
+       dragItems[3].addEventListener('drag', function (e) {
+           e.target.style.top = parseInt(fn.vtop + e.gesture.deltaY) + 'px';
+
+           e.target.style.left = parseInt(fn.vleft + e.gesture.deltaX) + 'px';
+
+
+       });
+       dragItems[3].addEventListener('dragend', function (e) {
+           // THIS EVENT IS NOT REQUIRED UNLESS YOU ARE DETECTING DROP
+           fn.vtop = parseInt(e.target.style.top || 0, 10);
+           fn.vleft = parseInt(e.target.style.left || 0, 10);
+
+           posX[3] = parseInt(fn.vleft);
+           posY[3] = parseInt(fn.vtop);
+           console.log("x[3] : " + posX[3]);
+           console.log("y[3] : " + posY[3]);
+       });
+
+//        var dragItems = document.querySelectorAll('.draggable');
+ /*       for (var i = 0; i < dragItems.length; i++) {
+
             dragItems[i].addEventListener('dragstart', function(e) {
                 fn.vtop = parseInt(e.target.style.top || 0,10);
                 fn.vleft = parseInt(e.target.style.left || 0,10);
@@ -456,16 +671,12 @@
                 fn.vtop = parseInt(e.target.style.top || 0,10);
                 fn.vleft = parseInt(e.target.style.left || 0,10);
 
-
-                console.log("x : "+fn.vleft);
-                console.log("y : "+fn.vtop);
-
-
                 posX[i] =  parseInt(fn.vleft);
                 posY[i] =  parseInt(fn.vtop);
-
+                console.log("x["+i+"] : "+posX[i]);
+                console.log("y["+i+"] : "+posY[i]);
             });
-        }
+        }*/
     }
     document.addEventListener('init', function(event) {
         var page = event.target;
