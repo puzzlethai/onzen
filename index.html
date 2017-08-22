@@ -107,7 +107,7 @@
 
         <ons-row style="height:60px">
             <ons-col width="30%" vertical-align="center"> ข้อความ 1: </ons-col>
-            <ons-col vertical-align="center"><ons-input id="yourtext0" modifier="underbar" placeholder="ใส่ข้อความตรงนี้" ></ons-input></ons-col>
+            <ons-col vertical-align="center"><ons-input id="yourtext0" modifier="underbar" placeholder="ใส่ข้อความตรงนี้" oninput="checkInput(event)" ></ons-input></ons-col>
         </ons-row>
         <ons-row style="height:60px">
             <ons-col width="30%" vertical-align="center"> ข้อความ 2: </ons-col>
@@ -379,8 +379,8 @@ let txtwidth = 0;
         }
         let ctx = canvas.getContext("2d");
 
-        // check width of text in canvas
-        if (canvasName !== 'canvasPV') {
+        // check width of text in canvas only page for select position
+        if ((canvasName.substring(0, canvasName.length - 1) === 'txtCanvas')) {
             ctx.font = '50px' + ' ' + fontName;
             let txtObj = ctx.measureText(wordIng);
             txtwidth = txtObj.width;
@@ -401,6 +401,13 @@ let txtwidth = 0;
         ctx.strokeText(wordIng, xPos, yPos);
         ctx.fill();
         ctx.stroke();
+    }
+    function checkInput(event) {
+        let number = event.target.value.length;
+        console.log("number = "+number);
+        if (number > 5) {
+            ons.notification.alert("จำกัดแค่ 5 ตัวอักษร/nกรุณาใส่คำที่เกินในช่องถัดไป");
+        }
     }
     function colorSelects(event,num) {
         txtColor[parseInt(num)] = event.target.value;
@@ -693,19 +700,15 @@ let txtwidth = 0;
 
         } else if (page.id === 'page5') {
             page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
-let canV = document.getElementById("canvasPV");
-let conTxt = canV.getContext("2d");
-       /*     c = document.getElementById("canvasPV");
-            c.width = '370';
-            c.height = '320'; */
-  //          context_can = c.getContext("2d");
+            c = document.getElementById("canvasPV");
+           context_can = c.getContext("2d");
             image = new Image();
             image.onload = function() {
                 var margin_top = $(".toolbar").css("height");
                 console.log("margin :"+margin_top);
                 console.log("x : "+posX);
                 console.log("y : "+posY);
-                conTxt.drawImage(image, 0, 0);
+                context_can.drawImage(image, 0, 0);
                 drawText(txt[0],"canvasPV",txtColor[0],borderColor[0],txtSize[0],"Sriracha",posX[0],posY[0]);
                 drawText(txt[1],"canvasPV",txtColor[1],borderColor[1],txtSize[1],"Sriracha",posX[1],posY[1]);
                 drawText(txt[2],"canvasPV",txtColor[2],borderColor[2],txtSize[2],"Sriracha",posX[2],posY[2]);
