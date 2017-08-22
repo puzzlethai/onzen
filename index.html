@@ -351,9 +351,13 @@
     var no_border = false;
     var txt =['','','',''];
 
-    function setBorderCanvas(canvasName,color){
+    function setBorderCanvas(canvasName,color,borderless=false){
         let canvas =document.getElementById(canvasName);
-        canvas.style.borderColor =color;
+        if (borderless === true) {
+            console.log("in no border2");
+            canvas.style.borderStyle = 'none';
+        } else {canvas.style.borderColor =color;}
+
     }
     function clearCanvas(canvasName){
         let canvas =document.getElementById(canvasName);
@@ -362,7 +366,7 @@
     }
     function drawText(wordIng,canvasName,textColor,strokeColor='black',fontSize='40px',fontName='Sriracha',xPos='0',yPos='0'){
         let canvas =document.getElementById(canvasName);
-
+let txtwidth = 0;
         if ((canvasName.substring(0, canvasName.length - 1) === 'canvasText')&&(strokeColor=== 'white')){
             canvas.style.background ='black';
             //canvas.style.borderColor ='red';
@@ -374,6 +378,15 @@
             strokeColor =textColor;
         }
         let ctx = canvas.getContext("2d");
+
+        // check width of text in canvas
+        if (canvasName !== 'canvasPV') {
+            ctx.font = '50px' + ' ' + fontName;
+            let txtObj = ctx.measureText(wordIng);
+            txtwidth = txtObj.width;
+            console.log("txtwidth = " + txtwidth);
+            canvas.width = txtwidth;
+        }
         ctx.textAlign = "left";
         ctx.textBaseline = "top";
         ctx.font = fontSize + ' '+ fontName;
@@ -429,124 +442,7 @@
     });
     var margin_top = $(".toolbar").css("height");
 
-/*    var eak0 = window.fn;   // ลองเปลี่ยนแค่ fn เป็น fn 1 และกัน
-         eak0 = {};
-    var dragItems = [];
-    dragItems[0] = document.getElementById('txtCanvas0');
-    dragItems[1] = document.getElementById('txtCanvas1');
-    dragItems[2] = document.getElementById('txtCanvas2');
-    dragItems[3] = document.getElementById('txtCanvas3');
-    eak0.enableGD = function() {
 
-        eak0.vtop = posY[0];
-        eak0.vleft = posX[0];
-        dragItems[0].addEventListener('dragstart', function (e) {
-            eak0.vtop = parseInt(e.target.style.top || 0, 10);
-            eak0.vleft = parseInt(e.target.style.left || 0, 10);
-
-        });
-        dragItems[0].addEventListener('drag', function (e) {
-            e.target.style.top = parseInt(eak0.vtop + e.gesture.deltaY) + 'px';
-
-            e.target.style.left = parseInt(eak0.vleft + e.gesture.deltaX) + 'px';
-
-
-        });
-        dragItems[0].addEventListener('dragend', function (e) {
-            // THIS EVENT IS NOT REQUIRED UNLESS YOU ARE DETECTING DROP
-            eak0.vtop = parseInt(e.target.style.top || 0, 10);
-            eak0.vleft = parseInt(e.target.style.left || 0, 10);
-
-            posX[0] = parseInt(eak0.vleft);
-            posY[0] = parseInt(eak0.vtop);
-            console.log("x[0] : " + posX[0]);
-            console.log("y[0] : " + posY[0]);
-        });
-    }
-    var eak1 = window.fn;
-    eak1 = {};
-    eak1.enableGD = function() {
-        eak1.vtop = posY[1];
-        eak1.vleft = posX[1];
-        dragItems[1].addEventListener('dragstart', function (e) {
-            eak1.vtop = parseInt(e.target.style.top || 0, 10);
-            eak1.vleft = parseInt(e.target.style.left || 0, 10);
-
-        });
-        dragItems[1].addEventListener('drag', function (e) {
-            e.target.style.top = parseInt(eak1.vtop + e.gesture.deltaY) + 'px';
-
-            e.target.style.left = parseInt(eak1.vleft + e.gesture.deltaX) + 'px';
-
-
-        });
-        dragItems[1].addEventListener('dragend', function (e) {
-            // THIS EVENT IS NOT REQUIRED UNLESS YOU ARE DETECTING DROP
-            eak1.vtop = parseInt(e.target.style.top || 0, 10);
-            eak1.vleft = parseInt(e.target.style.left || 0, 10);
-
-            posX[1] = parseInt(eak1.vleft);
-            posY[1] = parseInt(eak1.vtop);
-            console.log("x[1] : " + posX[1]);
-            console.log("y[1] : " + posY[1]);
-        });
-    }
-    var eak2 = window.fn;
-    eak2 = {};
-    eak2.enableGD = function() {
-        eak2.vtop = posY[2];
-        eak2.vleft = posX[2];
-        dragItems[2].addEventListener('dragstart', function (e) {
-            eak2.vtop = parseInt(e.target.style.top || 0, 10);
-            eak2.vleft = parseInt(e.target.style.left || 0, 10);
-
-        });
-        dragItems[2].addEventListener('drag', function (e) {
-            e.target.style.top = parseInt(eak2.vtop + e.gesture.deltaY) + 'px';
-
-            e.target.style.left = parseInt(eak2.vleft + e.gesture.deltaX) + 'px';
-
-
-        });
-        dragItems[2].addEventListener('dragend', function (e) {
-            // THIS EVENT IS NOT REQUIRED UNLESS YOU ARE DETECTING DROP
-            eak2.vtop = parseInt(e.target.style.top || 0, 10);
-            eak2.vleft = parseInt(e.target.style.left || 0, 10);
-
-            posX = parseInt(eak2.vleft);
-            posY = parseInt(eak2.vtop);
-            console.log("x[2] : " + posX[2]);
-            console.log("y[2] : " + posY[2]);
-        });
-    }
-    var eak3 = window.fn;
-    eak3 = {};
-    eak3.enableGD = function(){
-        eak3.vtop = posY[3];
-        eak3.vleft = posX[3];
-        dragItems[3].addEventListener('dragstart', function(e) {
-            eak3.vtop = parseInt(e.target.style.top || 0,10);
-            eak3.vleft = parseInt(e.target.style.left || 0,10);
-
-        });
-        dragItems[3].addEventListener('drag', function(e) {
-            e.target.style.top = parseInt(eak3.vtop + e.gesture.deltaY) + 'px';
-
-            e.target.style.left = parseInt(eak3.vleft + e.gesture.deltaX) + 'px';
-
-
-        });
-        dragItems[3].addEventListener('dragend', function(e) {
-            // THIS EVENT IS NOT REQUIRED UNLESS YOU ARE DETECTING DROP
-            eak3.vtop = parseInt(e.target.style.top || 0,10);
-            eak3.vleft = parseInt(e.target.style.left || 0,10);
-
-            posX[3] =  parseInt(eak3.vleft);
-            posY[3] =  parseInt(eak3.vtop);
-            console.log("x[3] : "+posX[3]);
-            console.log("y[3] : "+posY[3]);
-        });
-    }*/
 
 //    fn.vtop = parseInt(margin_top);
     window.fn = {};
@@ -767,14 +663,26 @@
 
             };
             image.src = imageData;
-            setBorderCanvas("txtCanvas0",'red');
-            setBorderCanvas("txtCanvas1",'blue');
-            setBorderCanvas("txtCanvas2",'green');
-            setBorderCanvas("txtCanvas3",'orange');
-            drawText(txt[0],"txtCanvas0",txtColor[0],borderColor[0],txtSize[0],"Sriracha",0,0);
-            drawText(txt[1],"txtCanvas1",txtColor[1],borderColor[1],txtSize[1],"Sriracha",0,0);
-            drawText(txt[2],"txtCanvas2",txtColor[2],borderColor[2],txtSize[2],"Sriracha",0,0);
-            drawText(txt[3],"txtCanvas3",txtColor[3],borderColor[3],txtSize[3],"Sriracha",0,0);
+            if (txt[0]!==''){
+                setBorderCanvas("txtCanvas0",'red');
+                drawText(txt[0],"txtCanvas0",txtColor[0],borderColor[0],txtSize[0],"Sriracha",0,0);
+            } else setBorderCanvas("txtCanvas0",'red',true);
+
+
+            if (txt[1]!==''){
+                setBorderCanvas("txtCanvas1",'blue');
+                drawText(txt[1],"txtCanvas1",txtColor[1],borderColor[1],txtSize[1],"Sriracha",0,0);
+            } else setBorderCanvas("txtCanvas1",'blue',true);
+
+            if (txt[2]!==''){
+                setBorderCanvas("txtCanvas2",'green');
+                drawText(txt[2],"txtCanvas2",txtColor[2],borderColor[2],txtSize[2],"Sriracha",0,0);
+            } else setBorderCanvas("txtCanvas2",'green',true);
+
+            if (txt[3]!==''){
+                setBorderCanvas("txtCanvas3",'orange');
+                drawText(txt[3],"txtCanvas3",txtColor[3],borderColor[3],txtSize[3],"Sriracha",0,0);
+            } else setBorderCanvas("txtCanvas3",'orange',true);
 
 
             page.querySelector('#next-page5').onclick = function() {
@@ -785,17 +693,19 @@
 
         } else if (page.id === 'page5') {
             page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
-
-
-            c = document.getElementById("canvasPV");
-            context_can = c.getContext("2d");
+let canV = document.getElementById("canvasPV");
+let conTxt = canV.getContext("2d");
+       /*     c = document.getElementById("canvasPV");
+            c.width = '370';
+            c.height = '320'; */
+  //          context_can = c.getContext("2d");
             image = new Image();
             image.onload = function() {
                 var margin_top = $(".toolbar").css("height");
                 console.log("margin :"+margin_top);
                 console.log("x : "+posX);
                 console.log("y : "+posY);
-                context_can.drawImage(image, 0, 0);
+                conTxt.drawImage(image, 0, 0);
                 drawText(txt[0],"canvasPV",txtColor[0],borderColor[0],txtSize[0],"Sriracha",posX[0],posY[0]);
                 drawText(txt[1],"canvasPV",txtColor[1],borderColor[1],txtSize[1],"Sriracha",posX[1],posY[1]);
                 drawText(txt[2],"canvasPV",txtColor[2],borderColor[2],txtSize[2],"Sriracha",posX[2],posY[2]);
