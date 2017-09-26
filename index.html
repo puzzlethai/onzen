@@ -542,7 +542,7 @@ let txtwidth = 0;
             drawText(txt[num.toString()], "canvasText"+num.toString(), txtColor[num], borderColor[num], txtSize[num]);
         }
     }
-    document.addEventListener("show",function(e){
+/*    document.addEventListener("show",function(e){
         if(e.target.id == 'page4'){
 
             fn.enableGD();
@@ -550,11 +550,11 @@ let txtwidth = 0;
         } else if (e.target.id == 'page3'){ // make font show correct
 
           page3draw();
-           /* clearCanvas("canvasText0");
+           /!* clearCanvas("canvasText0");
             drawText(txt[0],"canvasText0",txtColor[parseInt(num)],borderColor[parseInt(num)],txtSize[parseInt(num)],"Sriracha",0,0);
-*/
+*!/
         }
-    });
+    })*/;
     var margin_top = $(".toolbar").css("height");
 
 
@@ -689,145 +689,135 @@ let txtwidth = 0;
             });
         }*/
     }
-    document.addEventListener('init', function(event) {
+    document.addEventListener('show', function(event) {
         var page = event.target;
+        switch (page.id) {
+            case 'page1':
+                $('.image-editor').cropit({
+                    smallImage: 'allow',
+                    initialZoom: 'min', // 'image'
+                    minZoom: 'fill', // 'fit'
+                    freeMove: true,
+                    imageBackground: true,
+                    onImageError: function (e) {
+                        ons.notification.alert(e.message);
+                    },
+                    onImageLoaded: function (ev) {
+                        $('#next-page2').attr('disabled', false);  // make Next button Enable
+                    }
+                });
+                // $('.image-editor').cropit('previewSize', { width: 370, height: 320 });
+                $('.image-editor').cropit();
 
-        if (page.id === 'page1') {
-            $('.image-editor').cropit({
-                smallImage: 'allow',
-                initialZoom: 'min', // 'image'
-                minZoom: 'fill', // 'fit'
-                freeMove :true,
-                imageBackground: true,
-                onImageError: function(e) {
-                    ons.notification.alert(e.message);
-                },
-                onImageLoaded: function(ev){
-                    $('#next-page2').attr('disabled', false);  // make Next button Enable
-                }
-            });
-            // $('.image-editor').cropit('previewSize', { width: 370, height: 320 });
-            $('.image-editor').cropit();
+                $('.rotate-cw').click(function () {
+                    $('.image-editor').cropit('rotateCW');
+                });
+                $('.rotate-ccw').click(function () {
+                    $('.image-editor').cropit('rotateCCW');
+                });
+                page.querySelector('#next-page2').onclick = function () {
 
-            $('.rotate-cw').click(function() {
-                $('.image-editor').cropit('rotateCW');
-            });
-            $('.rotate-ccw').click(function() {
-                $('.image-editor').cropit('rotateCCW');
-            });
-            page.querySelector('#next-page2').onclick = function() {
+                    document.querySelector('#myNavigator').pushPage('page2.html');
+                };
+                break;
+            case 'page2':
+                page.querySelector('#next-page3').onclick = function () {
+                    txt[0] = document.getElementById('yourtext0').value;
+                    txt[1] = document.getElementById('yourtext1').value;
+                    txt[2] = document.getElementById('yourtext2').value;
+                    txt[3] = document.getElementById('yourtext3').value;
+                    document.querySelector('#myNavigator').pushPage('page3.html');
+                };
+                break;
+            case 'page3':
+                page.querySelector('#next-page4').onclick = function () {
 
-                document.querySelector('#myNavigator').pushPage('page2.html');
-            };
+                    document.querySelector('#myNavigator').pushPage('page4.html', {data: {title: 'เลือกตำแหน่ง'}});
+                };
+                page3draw();
+                page3draw();
+                break;
+            case 'page4':
+                page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
 
-        } else if (page.id === 'page2') {
+                /* Initialize Firebase
+                 var config = {
+                 apiKey: "AIzaSyA83WDgXFYbIXc6wI0D6tpShrIhMW8teRQ",
+                 authDomain: "mysticker-f7d1e.firebaseapp.com",
+                 databaseURL: "https://mysticker-f7d1e.firebaseio.com",
+                 projectId: "mysticker-f7d1e",
+                 storageBucket: "mysticker-f7d1e.appspot.com",
+                 messagingSenderId: "342976982342"
+                 };
+                 firebase.initializeApp(config);
+                 */
+                document.body._gestureDetector.dispose(); // Touch Enable
+                fn.enableGD();
+                imageData = $('.image-editor').cropit('export', {
+                    quality: 1
+                });
 
+                c = document.getElementById("cavasPIC");
+                context_can = c.getContext("2d");
+                image = new Image();
+                image.onload = function () {
+                    context_can.drawImage(image, 0, 0);
 
-            page.querySelector('#next-page3').onclick = function() {
-            txt[0] = document.getElementById('yourtext0').value;
-            txt[1] = document.getElementById('yourtext1').value;
-            txt[2] = document.getElementById('yourtext2').value;
-            txt[3] = document.getElementById('yourtext3').value;
-                document.querySelector('#myNavigator').pushPage('page3.html');
-            };
-
-        } else if (page.id === 'page3') {
-
-
-
-            page.querySelector('#next-page4').onclick = function() {
-
-                document.querySelector('#myNavigator').pushPage('page4.html', {data: {title: 'เลือกตำแหน่ง'}});
-            };
-            page3draw();
-
-
-            /* page2draw();
-             page2clear();
-             page2draw();
-             page2clear();
-             page2draw();
-             page2clear();
-             page2draw();*/
-
-
-        } else if (page.id === 'page4') {
-            page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
-
-            /* Initialize Firebase
-             var config = {
-             apiKey: "AIzaSyA83WDgXFYbIXc6wI0D6tpShrIhMW8teRQ",
-             authDomain: "mysticker-f7d1e.firebaseapp.com",
-             databaseURL: "https://mysticker-f7d1e.firebaseio.com",
-             projectId: "mysticker-f7d1e",
-             storageBucket: "mysticker-f7d1e.appspot.com",
-             messagingSenderId: "342976982342"
-             };
-             firebase.initializeApp(config);
-             */
-            document.body._gestureDetector.dispose(); // Touch Enable
-            imageData = $('.image-editor').cropit('export', {
-                quality: 1
-            });
-
-            c = document.getElementById("cavasPIC");
-            context_can = c.getContext("2d");
-            image = new Image();
-            image.onload = function() {
-                context_can.drawImage(image, 0, 0);
-
-            };
-            image.src = imageData;
-            if (txt[0]!==''){
-                setBorderCanvas("txtCanvas0",'red');
-                drawText(txt[0],"txtCanvas0",txtColor[0],borderColor[0],txtSize[0],"Sriracha",0,0);
-            } else setBorderCanvas("txtCanvas0",'red',true);
+                };
+                image.src = imageData;
+                if (txt[0] !== '') {
+                    setBorderCanvas("txtCanvas0", 'red');
+                    drawText(txt[0], "txtCanvas0", txtColor[0], borderColor[0], txtSize[0], "Sriracha", 0, 0);
+                } else setBorderCanvas("txtCanvas0", 'red', true);
 
 
-            if (txt[1]!==''){
-                setBorderCanvas("txtCanvas1",'blue');
-                drawText(txt[1],"txtCanvas1",txtColor[1],borderColor[1],txtSize[1],"Sriracha",0,0);
-            } else setBorderCanvas("txtCanvas1",'blue',true);
+                if (txt[1] !== '') {
+                    setBorderCanvas("txtCanvas1", 'blue');
+                    drawText(txt[1], "txtCanvas1", txtColor[1], borderColor[1], txtSize[1], "Sriracha", 0, 0);
+                } else setBorderCanvas("txtCanvas1", 'blue', true);
 
-            if (txt[2]!==''){
-                setBorderCanvas("txtCanvas2",'green');
-                drawText(txt[2],"txtCanvas2",txtColor[2],borderColor[2],txtSize[2],"Sriracha",0,0);
-            } else setBorderCanvas("txtCanvas2",'green',true);
+                if (txt[2] !== '') {
+                    setBorderCanvas("txtCanvas2", 'green');
+                    drawText(txt[2], "txtCanvas2", txtColor[2], borderColor[2], txtSize[2], "Sriracha", 0, 0);
+                } else setBorderCanvas("txtCanvas2", 'green', true);
 
-            if (txt[3]!==''){
-                setBorderCanvas("txtCanvas3",'orange');
-                drawText(txt[3],"txtCanvas3",txtColor[3],borderColor[3],txtSize[3],"Sriracha",0,0);
-            } else setBorderCanvas("txtCanvas3",'orange',true);
+                if (txt[3] !== '') {
+                    setBorderCanvas("txtCanvas3", 'orange');
+                    drawText(txt[3], "txtCanvas3", txtColor[3], borderColor[3], txtSize[3], "Sriracha", 0, 0);
+                } else setBorderCanvas("txtCanvas3", 'orange', true);
 
 
-            page.querySelector('#next-page5').onclick = function() {
+                page.querySelector('#next-page5').onclick = function () {
 
-                document.querySelector('#myNavigator').pushPage('page5.html', {data: {title: 'พรีวิว'}});
+                    document.querySelector('#myNavigator').pushPage('page5.html', {data: {title: 'พรีวิว'}});
 
-            };
+                };
+                break;
+                page.querySelector('ons-back-button').onClick = function() {
+                    alert('onClick event overridden');
+                    nextPage('page3.html');
+                };
+            case 'page5':
+                page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
+                c = document.getElementById("canvasPV");
+                context_can = c.getContext("2d");
+                image = new Image();
+                image.onload = function () {
+                    var margin_top = $(".toolbar").css("height");
+                    console.log("margin :" + margin_top);
+                    console.log("x : " + posX);
+                    console.log("y : " + posY);
+                    context_can.drawImage(image, 0, 0);
+                    drawText(txt[0], "canvasPV", txtColor[0], borderColor[0], txtSize[0], "Sriracha", posX[0], posY[0]);
+                    drawText(txt[1], "canvasPV", txtColor[1], borderColor[1], txtSize[1], "Sriracha", posX[1], posY[1]);
+                    drawText(txt[2], "canvasPV", txtColor[2], borderColor[2], txtSize[2], "Sriracha", posX[2], posY[2]);
+                    drawText(txt[3], "canvasPV", txtColor[3], borderColor[3], txtSize[3], "Sriracha", posX[3], posY[3]);
 
-        } else if (page.id === 'page5') {
-            page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
-            c = document.getElementById("canvasPV");
-           context_can = c.getContext("2d");
-            image = new Image();
-            image.onload = function() {
-                var margin_top = $(".toolbar").css("height");
-                console.log("margin :"+margin_top);
-                console.log("x : "+posX);
-                console.log("y : "+posY);
-                context_can.drawImage(image, 0, 0);
-                drawText(txt[0],"canvasPV",txtColor[0],borderColor[0],txtSize[0],"Sriracha",posX[0],posY[0]);
-                drawText(txt[1],"canvasPV",txtColor[1],borderColor[1],txtSize[1],"Sriracha",posX[1],posY[1]);
-                drawText(txt[2],"canvasPV",txtColor[2],borderColor[2],txtSize[2],"Sriracha",posX[2],posY[2]);
-                drawText(txt[3],"canvasPV",txtColor[3],borderColor[3],txtSize[3],"Sriracha",posX[3],posY[3]);
-
-            };
-            image.src = imageData;
-
-/*            var w=window.open('about:blank','image from canvas');
-            w.document.write("<img src='"+ c.toDataURL("image/png")+"' alt='from canvas'/>")*/
+                };
+                image.src = imageData;
+                break;
         }
+
     });
 
 </script>
